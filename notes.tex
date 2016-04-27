@@ -1,21 +1,22 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath,textcomp,amssymb,geometry,graphicx,enumerate,tkz-graph}
 \usepackage[backend=biber]{biblatex}
+\parindent=0pt
+\setlength{\parskip}{1em}
 \bibliography{congestion}
 \begin{document}
 \textbf{}
 If you have a graph $G$ with start points $s$ and $t$, with $n$ edges with cost $x$ in one after another connecting $s$ to $t$ and 1 edge from $s$ to $t$ with cost $a$.  If you suppose that players are irrational in the sense that they take the square root of each of their costs (modeling high costs as being evauluated similarly and low costs wanting more avoidance) and build a new graph $G'$ ($G'$ has square roots in it).  With $k$ players, the price of anarchy (in the sense that taking the worst equilibrium in $G'$ divided by the socially optimal in $G$) is $\frac{k + kn + 2n}{4k}$ so around $n/2$ as $n$ goes to infinity.  Also we evaluated routing half atop and half abottom so $k/2$ maximizes the POA and to find the worst poa we'd want to maximize that quantity which means minimizing the number of players $k$ so the worst case is for 2 players.
 
-$\\$ Using $\beta$ instead of square root (ie $\beta = 1/2$), we get $\frac{n^{1/\beta - 1}}{2}$.
+Using $\beta$ instead of square root (ie $\beta = 1/2$), we get $\frac{n^{1/\beta - 1}}{2}$.
 
-$\\$ We'll assume an atomic congestion game. 
+We'll assume an atomic congestion game. 
 
-$\\$ Since we have the theorem that any scaling of each edge of $G$ by some scalar perserves the paths which are the nash equalibriums in $TG'$, we can assume without loss of generality that all costs are greater than 1.
+Since we have the theorem that any scaling of each edge of $G$ by some scalar perserves the paths which are the nash equalibriums in $TG'$, we can assume without loss of generality that all costs are greater than 1.
 
-$\\$ A general intuition to be drawn is the idea that people since addition doesn't scale with non-linear transformations, taking a longer path may seem worse than a lot of smaller ones that add up to a larger number than the longer path.
+A general intuition to be drawn is the idea that people since addition doesn't scale with non-linear transformations, taking a longer path may seem worse than a lot of smaller ones that add up to a larger number than the longer path.
 
-$\\$ Denote the cost of the socially optimal path in $G$ as OPT, the price of anarchy in $G'$ as POA', the cost of the path associated with the worst nash equilibrium in $G'$ as EQ', and the cost of the path in $G$associated with the worst nash equilibrium cost path in $G'$ as EQ.
-
+Denote the cost of the socially optimal path in $G$ as OPT, the price of anarchy in $G'$ as POA', the cost of the path associated with the worst nash equilibrium in $G'$ as EQ', and the cost of the path in $G$associated with the worst nash equilibrium cost path in $G'$ as EQ.
 \begin{align*}
 \text{OPT} &\ge \text{the cost of the path in G' that has the same edges as the path associated with OPT} \\
 &\ge \text{OPT}' \\
@@ -32,12 +33,14 @@ $\\$ Denote the cost of the socially optimal path in $G$ as OPT, the price of an
 &= \text{POA}
 \end{align*}
 
-$\\$\textbf{Past bad ideas}
-- creating a multiple "bridges" between $s$ and $t$ such that each bridge has $n$ edges of cost $2^cx$ doesn't do much (you really need a constant as one of the bridges so that you have a change between $G'$ and $G$)
+\textbf{Past bad ideas} \\
+- creating a multiple "bridges" between $s$ and $t$ such that each bridge has
+$n$ edges of cost $2^cx$ doesn't do much (you really need a constant as one of
+the bridges so that you have a change between $G'$ and $G$) \\
 - re-weighing probability is hard...math is hard
 
-$\\$\textbf{Laters}
-- Look at $\beta$ instead of square root
+\textbf{Laters} \\
+- Look at $\beta$ instead of square root \\
 - why pigou is worst case
 
 
