@@ -1,5 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath,textcomp,amssymb,geometry,graphicx,enumerate,tkz-graph}
+\usepackage[backend=biber]{biblatex}
+\bibliography{congestion}
 \begin{document}
 \textbf{}
 If you have a graph $G$ with start points $s$ and $t$, with $n$ edges with cost $x$ in one after another connecting $s$ to $t$ and 1 edge from $s$ to $t$ with cost $a$.  If you suppose that players are irrational in the sense that they take the square root of each of their costs (modeling high costs as being evauluated similarly and low costs wanting more avoidance) and build a new graph $G'$ ($G'$ has square roots in it).  With $k$ players, the price of anarchy (in the sense that taking the worst equilibrium in $G'$ divided by the socially optimal in $G$) is $\frac{k + kn + 2n}{4k}$ so around $n/2$ as $n$ goes to infinity.  Also we evaluated routing half atop and half abottom so $k/2$ maximizes the POA and to find the worst poa we'd want to maximize that quantity which means minimizing the number of players $k$ so the worst case is for 2 players.
@@ -39,4 +41,9 @@ $\\$\textbf{Laters}
 - why pigou is worst case
 
 
+\nocite{Awerbuch2005}
+\nocite{Christodoulou2005}
+\nocite{Rieger2008}
+
+\printbibliography
 \end{document}
