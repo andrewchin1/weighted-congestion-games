@@ -17,11 +17,18 @@ $\\$ Denote the cost of the socially optimal path in $G$ as OPT, the price of an
 \begin{align*}
 \text{OPT} &\ge \text{the cost of the path in G' that has the same edges as the path associated with OPT} \\
 &\ge \text{OPT}' \\
-&\ge {\text{EQ}'}{\text{POA}'} \\
+&\ge \frac{\text{EQ}'}{\text{POA}'} \\
+&= \frac{\sum\limits_{e \in \text{path(EQ)}} f'_e}{\text{POA}'} \\
+&= \frac{\sum\limits_{e \in \text{path(EQ)}} \sqrt{f_e}}{\text{POA}'}
 \end{align*}
-
-
-
+\begin{align*}
+\iff \text{OPT}^2 &\ge \frac{p{\sum\limits_{e \in \text{path(EQ)}} \sqrt{f_e}}^2}{\text{POA}'^2} \\
+&\ge \frac{\sum\limits_{e \in \text{path(EQ)}} f_e }{\text{POA}'^2}
+\end{align*}
+\begin{align*}
+\iff \text{OPT}(\text{POA}'^2) &\ge \frac{\sum\limits_{e \in \text{path(EQ)}} f_e }{\text{OPT}} \\
+&= \text{POA}
+\end{align*}
 
 $\\$\textbf{Past bad ideas}
 - creating a multiple "bridges" between $s$ and $t$ such that each bridge has $n$ edges of cost $2^cx$ doesn't do much (you really need a constant as one of the bridges so that you have a change between $G'$ and $G$)
