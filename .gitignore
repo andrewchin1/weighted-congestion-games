@@ -4,3 +4,7 @@
 *.log
 *.pdf
 *.gz
+*.bbl
+*.bcf
+*.blg
+*.run.xml
