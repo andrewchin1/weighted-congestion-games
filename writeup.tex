@@ -1,5 +1,4 @@
 \documentclass[twoside]{article}
-\usepackage{lipsum} % Package to generate dummy text throughout this template
 \usepackage[sc]{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \linespread{1.05} % Line spacing - Palatino needs more space between lines
@@ -11,9 +10,6 @@
 \usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
 \usepackage{hyperref} % For hyperlinks in the PDF
 
-\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
-\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
-
 \usepackage{abstract} % Allows abstract customization
 \renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
 \renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
@@ -23,12 +19,15 @@
 \renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
 \titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
 \titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+\usepackage[backend=biber,url=false]{biblatex}
+\bibliography{congestion}
 
 \usepackage{fancyhdr} % Headers and footers
 \pagestyle{fancy} % All pages have headers and footers
 \fancyhead{} % Blank out the default header
 \fancyfoot{} % Blank out the default footer
-\fancyhead[C]{CHANGE TITLE $\bullet$ CHANGE DATE $\bullet$ Papadimitriou's CS270} % Custom header text
+\def\titlee{LowBALLIN'}
+\fancyhead[C]{\titlee $\bullet$ Spring 2016 $\bullet$ Papadimitriou CS270} % Custom header text
 \fancyfoot[RO,LE]{\thepage} % Custom footer text
 
 \newcommand{\pbet}{^{(\beta)}}
@@ -41,14 +40,13 @@
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
-\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{CHANGE}} % Article title
+\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{\titlee}} % Article title
 
 \author{
 \large
 \textsc{Manish Raghavan, Serena Gupta}
 \vspace{-5mm}
 }
-\date{}
 
 %----------------------------------------------------------------------------------------
 
@@ -76,23 +74,43 @@
 
 \section{Introduction}
 
-% \lettrine[nindent=0em,lines=3]{L} % add text here
-% \lipsum[2-3] % Dummy text
+\section{A Motivating Example}
 
-%------------------------------------------------
+\section{Related Work}
+
+\section{Overview of Results}
 
 \section{Model Overview}
 
 Here we present a framework to model \textit{lowball agents} in a congestion game.  An atomic congestion game, $\mathcal{G} = (G, D, P, k)$, is a cost-minimization game parametrized by a directed graph $G$, $D$ a set of increasing delay functions $\{c_e : \mathbb{Z}_{>0} \to \mathbb{R}\}$, a set of start and end points for each player $P =\{(s_1, t_1), \cdots, (s_k, t_k)\}$ and $k$ players.  Recall from before, a lowball agent has a valuation function that is $V(x) = x^{\beta}$ for $0 < \beta \le 1$.  
 Lowball agents perceive congestion games by applying $V(x)$ to each edge's delay function, $c_e(x)$, and this leads to them perceiving the congestion as $\mathcal{G}\pbet= (G, D\pbet, P, k)$ where $D\pbet$ is the set of delay functions from $\{c_e\pbet(x) = (c_e(x))^\beta\}$ \fix.  Within this new congestion game $\mathcal{G}\pbet$, the lowball agents act rationally: however the true costs they incur are reflected by the delay functions in $\mathcal{G}$.   
 
-Let $S_i$ be the set of all strategies for player $i$ in $\mathcal{G}$ i.e. all paths go from $s_i$ to $t_i$.  Note $S_i$ is also the set of all strategies for player $i$ in $\mathcal{G}\pbet$.  Since the true costs agents incur is reflected in $\mathcal{G}$, it's useful to look at the difference in cost of an agent $i$'s strategy $s_i \in S_i$, the path it takes in the graph, with the costs functions in $\mathcal{G}\pbet$ versus the costs in $\mathcal{G}$.  Rational play in $\mathcal{G}\pbet$ amounts to the players playing according to a Nash equililbrium.  Furthermore we know from Rosenthal \cit that every atomic congestion game has a pure Nash equilibrium.  Thus for a given pure Nash equilibrium strategy profile $\mathbf{s} = (s_1, \cdots, s_k)$ with each $s_i \in S_i$ for each $i$, we can evaulate the perceived cost of $\mathbf{s}$ (ie the cost in $\mathcal{G}\pbet$) and actual cost that will be incurred (the cost in $\mathcal{G}$).
+Let $S_i$ be the set of all strategies for player $i$ in $\mathcal{G}$ i.e. all
+paths go from $s_i$ to $t_i$.  Note $S_i$ is also the set of all strategies for
+player $i$ in $\mathcal{G}\pbet$.  Since the true costs agents incur is
+reflected in $\mathcal{G}$, it's useful to look at the difference in cost of an
+agent $i$'s strategy $s_i \in S_i$, the path it takes in the graph, with the
+costs functions in $\mathcal{G}\pbet$ versus the costs in $\mathcal{G}$.
+Rational play in $\mathcal{G}\pbet$ amounts to the players playing according to
+a Nash equililbrium.  Furthermore we know from Rosenthal \cite{Rosenthal1973} that every atomic congestion game has a pure Nash equilibrium.  Thus for a given pure Nash equilibrium strategy profile $\mathbf{s} = (s_1, \cdots, s_k)$ with each $s_i \in S_i$ for each $i$, we can evaulate the perceived cost of $\mathbf{s}$ (ie the cost in $\mathcal{G}\pbet$) and actual cost that will be incurred (the cost in $\mathcal{G}$).
 
 In addition, we'll define for a strategy profile $\mathbf{s}$, the true cost to player $i$ to be: \[C_i(s) = \sum\limits_{e \in s_i}c_e(x_e)\] where $\mathbf{x}$ is the vector of the number of players on each edge induced by $\mathbf{s}$.  And the perceived cost to player $i$ is: \[C\pbet_i(s) = \sum\limits_{e \in s_i}c_e\pbet(x_e) = \sum\limits_{e \in s_i}c_e(x_e)^\beta\]  From this, we know the total social cost is: \[C(\mathbf{s}) = \sum_{i=1}^{k}C_i(\mathbf{s})\]
         
-Traditionally we define the \textit{price of anarchy (POA)}) to be the ratio between the worst Nash equilibrium and the overall optimum solution \cit.  In more precise terms, the price of anarchy for a family of games $\hat{\mathcal{G}}$: \[\sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s)}{C(\s^*)}\] where $\s$ is a Nash equilibrium of $\mathcal{G}$ and $\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.
+Traditionally we define the \textit{price of anarchy (POA)}) to be the ratio
+between the worst Nash equilibrium and the overall optimum solution
+\cite{Koutsoupias2009}.  In more precise terms, the price of anarchy for a family of games $\hat{\mathcal{G}}$: \[\sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s)}{C(\s^*)}\] where $\s$ is a Nash equilibrium of $\mathcal{G}$ and $\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.
 
-We'll define the \textit{lowball price of anarchy (LPOA)}) to be: \[\sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s\pbet)}{C(\s^*)}\] where $\s\pbet$ is a Nash equilibrium of $\mathcal{G\pbet}$ and $\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.  In other words, the LPOA is a ratio between the true cost of the Nash equilibrium reached by lowball agents and the overall optimum solution.
+We'll define the \textit{lowball price of anarchy (LPOA)}) to be: \[\sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s\pbet)}{C(\s^*)}\] where $\s\pbet$ is a Nash equilibrium of $\mathcal{G}\pbet$ and $\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.  In other words, the LPOA is a ratio between the true cost of the Nash equilibrium reached by lowball agents and the overall optimum solution.
+
+\section{Lower Bound on LPOA}
+
+\section{Upper Bound on LPOA}
+
+\section{Upper Bound on POA$\pbet$}
+
+\section{Open Questions}
+
+\printbibliography
 
 % Any path $s$ that a player takes in $\mathcal{G}^\bet$ can be mapped to a path in $\mathcal{G}^\bet$
 
@@ -100,72 +118,6 @@ We'll define the \textit{lowball price of anarchy (LPOA)}) to be: \[\sup_{\mathc
 
 
 
-% \begin{compactitem}
-% \item Donec dolor arcu, rutrum id molestie in, viverra sed diam
-% \item Curabitur feugiat
-% \item turpis sed auctor facilisis
-% \item arcu eros accumsan lorem, at posuere mi diam sit amet tortor
-% \item Fusce fermentum, mi sit amet euismod rutrum
-% \item sem lorem molestie diam, iaculis aliquet sapien tortor non nisi
-% \item Pellentesque bibendum pretium aliquet
-% \end{compactitem}
-% \lipsum[4] % Dummy text
-
-%------------------------------------------------
-
-% \section{Results}
-
-% \begin{table}[H]
-% \caption{Example table}
-% \centering
-% \begin{tabular}{llr}
-% \toprule
-% \multicolumn{2}{c}{Name} \\
-% \cmidrule(r){1-2}
-% First name & Last Name & Grade \\
-% \midrule
-% John & Doe & $7.5$ \\
-% Richard & Miles & $2$ \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-
-% \lipsum[5] % Dummy text
-
-% \begin{equation}
-% \label{eq:emc}
-% e = mc^2
-% \end{equation}
-
-% \lipsum[6] % Dummy text
-
-% %------------------------------------------------
-
-% \section{Discussion}
-
-% \subsection{Subsection One}
-
-% \lipsum[7] % Dummy text
-
-% \subsection{Subsection Two}
-
-% \lipsum[8] % Dummy text
-
-% %----------------------------------------------------------------------------------------
-% %	REFERENCE LIST
-% %----------------------------------------------------------------------------------------
-
-% \begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
-
-% \bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
-% Figueredo, A.~J. and Wolf, P. S.~A. (2009).
-% \newblock Assortative pairing and life history strategy - a cross-cultural
-%   study.
-% \newblock {\em Human Nature}, 20:317--330.
- 
-% \end{thebibliography}
-
-%----------------------------------------------------------------------------------------
 
 \end{multicols}
 
