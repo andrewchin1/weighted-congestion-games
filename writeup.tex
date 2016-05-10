@@ -1,44 +1,5 @@
 \documentclass[twoside]{article}
-\usepackage[sc]{mathpazo} % Use the Palatino font
-\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
-\linespread{1.05} % Line spacing - Palatino needs more space between lines
-\usepackage{microtype} % Slightly tweak font spacing for aesthetics
-\usepackage[hmarginratio=1:1,left=17mm, bottom=17mm, top=32mm,columnsep=15pt]{geometry} % Document margins
-\usepackage{multicol} % Used for the two-column layout of the document
-\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
-\usepackage{booktabs} % Horizontal rules in tables
-\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
-\usepackage{hyperref} % For hyperlinks in the PDF
-
-\usepackage{abstract} % Allows abstract customization
-\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
-\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
-
-\usepackage{titlesec} % Allows customization of titles
-\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
-\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
-\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
-\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
-\usepackage[backend=biber,url=false]{biblatex}
-\bibliography{congestion}
-
-\usepackage{fancyhdr} % Headers and footers
-\pagestyle{fancy} % All pages have headers and footers
-\fancyhead{} % Blank out the default header
-\fancyfoot{} % Blank out the default footer
-\def\titlee{LowBALLIN'}
-\fancyhead[C]{\titlee $\bullet$ Spring 2016 $\bullet$ Papadimitriou CS270} % Custom header text
-\fancyfoot[RO,LE]{\thepage} % Custom footer text
-
-\newcommand{\pbet}{^{(\beta)}}
-\newcommand{\s}{\mathbf{s}}
-\newcommand{\fix}{\textbf{FIX!!}}
-\newcommand{\cit}{\textbf{CITE!!}}
-
-
-%----------------------------------------------------------------------------------------
-%	TITLE SECTION
-%----------------------------------------------------------------------------------------
+\usepackage{paper}
 
 \title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{\titlee}} % Article title
 
@@ -48,42 +9,96 @@
 \vspace{-5mm}
 }
 
-%----------------------------------------------------------------------------------------
-
 \begin{document}
 
 \maketitle % Insert title
 
 \thispagestyle{fancy} % All pages have headers and footers
 
-%----------------------------------------------------------------------------------------
-%	ABSTRACT
-%----------------------------------------------------------------------------------------
-
 \begin{abstract}
 
-\noindent % Add shit in
+  Research shows that people aren't rational in evaluating costs --
+  instead, they systematically undervalue them in a nonlinear fashion
+  \cite{Kahneman1979}. Prospect theory seeks to describe and model this
+  behavior. We consider the effects of this bias on agents in atomic congestion
+  games, bounding its negative effects on social performance. We extend the
+  biased-smoothness framework proposed by Meir and Parkes to atomic congestion
+  games and apply it to the cost-biased agents that prospect theory puts forth
+  \cite{Meir2014}. We show regardless of the class of delay functions used, the
+  ratio between the performance of biased agents and the social optimum grows
+  with the size of the game. Roughly speaking, our findings indicate that people
+  misunderstand the additivity of costs, preferring one large cost over a large
+  number of smaller costs, even when it is not in their rational interest to do
+  so.
 
 \end{abstract}
-
-%----------------------------------------------------------------------------------------
-%	ARTICLE CONTENTS
-%----------------------------------------------------------------------------------------
 
 \begin{multicols}{2} % Two-column layout throughout the main article text
 
 \section{Introduction}
+Prospect theory, introduced by Kahneman and Tversky in 1979, characterizes some
+of the biases humans exhibit in decision-making \cite{Kahneman1979}. Roughly
+speaking, it proposes the idea that humans tend to overweight small
+probabilities and undervalue large rewards and costs. Experimental evidence
+shows people are \textit{risk-seeking} when it comes to costs -- for example,
+people prefer an 80\% chance of losing \$4,000 to a sure loss of \$3,000,
+despite the expected loss being higher \cite{Kahneman1979}.
+
+This bias leads to suboptimal behavior
 
 \section{A Motivating Example}
 
 \section{Related Work}
+The price of anarchy (POA) is defined as the worst-case ratio between a Nash
+equilibrium and the socially optimal solution in a game, and intuitively gives
+an upper bound on how closely the Nash equilibrium approximates the optimal
+solution \cite{Koutsoupias2009}. It has been extensively studied in atomic
+congestion games with rational agents, with tight matching lower and upper
+bounds shown for various classes of cost funtions \cite{Aland2011}
+\cite{Roughgarden2012}. Tim Roughgarden introduced the smooth analysis framework
+to not only bound the price of anarchy, but also to construct worst-case
+examples to provide matching lower bounds \cite{Roughgarden2012}.
+
+While classical game theory relies on the assumption of rational agents, recent
+work has sought to model agents with various behavioral biases. For example,
+Reshef Meir and David Parkes consider the effects of behavioral biases in
+nonatomic congestion games, applying smoothness arguments to upper bound the
+price of anarchy \cite{Meir2014}.
 
 \section{Overview of Results}
+Broadly, we answer the question ``what is the price of anarchy when agents
+underestimate costs?'' We define ``lowball agents'' as agents who underestimate
+costs following the behavioral models from prospect theory, and find the price
+of anarchy when these agents play atomic congestion games.
 
-\section{Model Overview}
+In Section~\ref{sec:lb}, we show that for an atomic congestion game with
+socially optimal strategy profile $\s^*$, the ``lowball price of anarchy'' is
+$\Omega(C(\s^*)^{1/\beta-1})$. In Sections~\ref{sec:ub} and~\ref{sec:ubl}, we
+show a matching upper bound of $O(C(\s^*)^{1/\beta - 1})$.
 
-Here we present a framework to model \textit{lowball agents} in a congestion game.  An atomic congestion game, $\mathcal{G} = (G, D, P, k)$, is a cost-minimization game parametrized by a directed graph $G$, $D$ a set of increasing delay functions $\{c_e : \mathbb{Z}_{>0} \to \mathbb{R}\}$, a set of start and end points for each player $P =\{(s_1, t_1), \cdots, (s_k, t_k)\}$ and $k$ players.  Recall from before, a lowball agent has a valuation function that is $V(x) = x^{\beta}$ for $0 < \beta \le 1$.  
-Lowball agents perceive congestion games by applying $V(x)$ to each edge's delay function, $c_e(x)$, and this leads to them perceiving the congestion as $\mathcal{G}\pbet= (G, D\pbet, P, k)$ where $D\pbet$ is the set of delay functions from $\{c_e\pbet(x) = (c_e(x))^\beta\}$ \fix.  Within this new congestion game $\mathcal{G}\pbet$, the lowball agents act rationally: however the true costs they incur are reflected by the delay functions in $\mathcal{G}$.   
+\section{The Model}
+
+Here we present a framework to model lowball agents in congestion games. A
+\textit{lowball agent} evaluates costs according to
+\begin{equation}
+  V(x) = x^{\beta}
+  \label{eq:val}
+\end{equation}
+for $0 < \beta \le 1$ \cite{Rieger2008}. For the remainder of this paper, we
+assume that each agent has the same parameter $\beta$.
+
+An atomic congestion game, $\mathcal{G} = (G, D, P, k)$, is a
+cost-minimization game parametrized by a directed graph $G$, a set of increasing
+delay functions $D = \{c_e : \mathbb{Z}_{>0} \to \mathbb{R}\}$, a set of start
+and end points for each player $P =\{(s_1, t_1), \cdots, (s_k, t_k)\}$, and $k$
+players.
+
+Lowball agents perceive congestion games by applying the valuation
+function~\eqref{eq:val} to each edge's delay function, $c_e(x)$, leading them to
+perceive the game as $\mathcal{G}\pbet= (G, D\pbet, P, k)$ where $D\pbet =
+\{c_e\pbet(x)\}$ where $c_e\pbet(x) = (c_e(x))^\beta$. Within this new
+congestion game $\mathcal{G}\pbet$, the lowball agents act rationally: however
+the true costs they incur are reflected by the delay functions in $\mathcal{G}$.   
 
 Let $S_i$ be the set of all strategies for player $i$ in $\mathcal{G}$ i.e. all
 paths go from $s_i$ to $t_i$.  Note $S_i$ is also the set of all strategies for
@@ -92,21 +107,275 @@ reflected in $\mathcal{G}$, it's useful to look at the difference in cost of an
 agent $i$'s strategy $s_i \in S_i$, the path it takes in the graph, with the
 costs functions in $\mathcal{G}\pbet$ versus the costs in $\mathcal{G}$.
 Rational play in $\mathcal{G}\pbet$ amounts to the players playing according to
-a Nash equililbrium.  Furthermore we know from Rosenthal \cite{Rosenthal1973} that every atomic congestion game has a pure Nash equilibrium.  Thus for a given pure Nash equilibrium strategy profile $\mathbf{s} = (s_1, \cdots, s_k)$ with each $s_i \in S_i$ for each $i$, we can evaulate the perceived cost of $\mathbf{s}$ (ie the cost in $\mathcal{G}\pbet$) and actual cost that will be incurred (the cost in $\mathcal{G}$).
+a Nash equilibrium.  Furthermore we know from Rosenthal \cite{Rosenthal1973}
+that every atomic congestion game has a pure Nash equilibrium.  Thus for a given
+pure Nash equilibrium strategy profile $\mathbf{s} = (s_1, \cdots, s_k)$ with
+each $s_i \in S_i$ for each $i$, we can evaulate the perceived cost of
+$\mathbf{s}$ (ie the cost in $\mathcal{G}\pbet$) and actual cost that will be
+incurred (the cost in $\mathcal{G}$).
 
-In addition, we'll define for a strategy profile $\mathbf{s}$, the true cost to player $i$ to be: \[C_i(s) = \sum\limits_{e \in s_i}c_e(x_e)\] where $\mathbf{x}$ is the vector of the number of players on each edge induced by $\mathbf{s}$.  And the perceived cost to player $i$ is: \[C\pbet_i(s) = \sum\limits_{e \in s_i}c_e\pbet(x_e) = \sum\limits_{e \in s_i}c_e(x_e)^\beta\]  From this, we know the total social cost is: \[C(\mathbf{s}) = \sum_{i=1}^{k}C_i(\mathbf{s})\]
+In addition, we'll define for a strategy profile $\mathbf{s}$, the true cost to
+player $i$ to be: \[C_i(s) = \sum\limits_{e \in s_i}c_e(x_e)\] where
+$\mathbf{x}$ is the vector of the number of players on each edge induced by
+$\mathbf{s}$.  And the perceived cost to player $i$ is: \[C\pbet_i(s) =
+\sum\limits_{e \in s_i}c_e\pbet(x_e) = \sum\limits_{e \in s_i}c_e(x_e)^\beta\]
+From this, we know the total social cost is: \[C(\mathbf{s}) =
+\sum_{i=1}^{k}C_i(\mathbf{s})\]
         
-Traditionally we define the \textit{price of anarchy (POA)}) to be the ratio
+Traditionally we define the \textit{price of anarchy (POA)} to be the ratio
 between the worst Nash equilibrium and the overall optimum solution
-\cite{Koutsoupias2009}.  In more precise terms, the price of anarchy for a family of games $\hat{\mathcal{G}}$: \[\sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s)}{C(\s^*)}\] where $\s$ is a Nash equilibrium of $\mathcal{G}$ and $\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.
+\cite{Koutsoupias2009}.  In more precise terms, the price of anarchy for a
+family of games $\hat{\mathcal{G}}$ is \[\sup_{\mathcal{G} \in \hat{\mathcal{G}}}
+\frac{C(\s)}{C(\s^*)}\] where $\s$ is a Nash equilibrium of $\mathcal{G}$ and
+$\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.
 
-We'll define the \textit{lowball price of anarchy (LPOA)}) to be: \[\sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s\pbet)}{C(\s^*)}\] where $\s\pbet$ is a Nash equilibrium of $\mathcal{G}\pbet$ and $\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.  In other words, the LPOA is a ratio between the true cost of the Nash equilibrium reached by lowball agents and the overall optimum solution.
+\begin{defn}
+  The \textit{lowball price of anarchy (LPOA)} is
+  \begin{equation}
+    \sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s\pbet)}{C(\s^*)}
+    \label{eq:lpoa}
+  \end{equation}
+  where $\s\pbet$ is a Nash equilibrium of $\mathcal{G}\pbet$ and $\s^*$ is the
+  socially optimum strategy profile of $\mathcal{G}$.
+\end{defn}
+In other words, the LPOA is a ratio between the true cost of the Nash
+equilibrium reached by lowball agents and the overall optimum solution.
 
-\section{Lower Bound on LPOA}
+\section{Preliminaries}
+\begin{lem} \label{lem:scale}
+  Scaling the cost functions by a constant $a > 0$, i.e. $\hat c_e(x) = a
+  c_e(x)$, does not change the ratio $C(\s\pbet)/C(\s^*)$.
+\end{lem}
+\begin{proof}
+  $\s\pbet$ is a Nash equilibrium in $\mathcal{G}\pbet$ if and only if $\sum_{e
+  \in s_i} c_e\pbet(x_e) \le \sum_{e \in s_i'} c_e\pbet(x_e + 1)$ for all $i$.
+  After scaling the cost functions by $a$, $\s\pbet$ is still a Nash equilibrium
+  because for all $i$, $\sum_{e \in s_i} \hat c_e\pbet(x_e) = a^\beta \sum_{e
+  \in s_i} c_e\pbet(x_e) \le a^\beta \sum_{e \in s_i'} c_e\pbet(x_e + 1) =
+  \sum_{e \in s_i'} \hat c_e\pbet(x_e+1)$.
 
-\section{Upper Bound on LPOA}
+  Since the strategy profile remains the same, the ratio between costs is $a
+  C(\s\pbet)/(a C(\s^*)) = C(\s\pbet)/C(\s^*)$.
+\end{proof}
 
-\section{Upper Bound on POA$\pbet$}
+Because $V(x) = x^\beta$ is concave, $V$ is subadditive, i.e.
+\begin{equation}
+  (x+y)^\beta \le x^\beta + y^\beta
+  \label{eq:subadditive}
+\end{equation}
+for $x,y \ge 0$.
+
+\section{Lower Bound on LPOA} \label{sec:lb}
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
+      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
+
+      \foreach \l/\n/\p in {{s/s/(0,0)}, {v1/ /(1,0)}, {v2/ /(3,0)},
+      {t/t/(4,0)}}
+      {
+        \node [vertex] at \p (\l) {$\n$};
+      }
+      \node at (2,0) (d) {$\dots$};
+      \draw
+      [-,thick,decorate,decoration={brace,amplitude=10pt}](3,-0.2) -- (0,-0.2)
+      node[black,midway,yshift=-0.5cm]
+      {$n$};
+
+      \foreach \a/\b in {{s/v1}, {v1/d}, {d/v2}, {v2/t}}
+      {
+        \Arc {\a}{\b}{1}
+      }
+
+      \draw [arc,bend left=40] (s) to node [auto] {$n^{1/\beta}$} (t);
+    \end{tikzpicture}
+    \caption{A game $\mathcal{G}$ with non-constant LPOA}
+    \label{fig:lower}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
+      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
+
+      \foreach \l/\n/\p in {{s/s/(0,0)}, {v1/ /(1,0)}, {v2/ /(3,0)},
+      {t/t/(4,0)}}
+      {
+        \node [vertex] at \p (\l) {$\n$};
+      }
+      \node at (2,0) (d) {$\dots$};
+      \draw
+      [-,thick,decorate,decoration={brace,amplitude=10pt}](3,-0.2) -- (0,-0.2)
+      node[black,midway,yshift=-0.5cm]
+      {$n$};
+
+      \foreach \a/\b in {{s/v1}, {v1/d}, {d/v2}, {v2/t}}
+      {
+        \Arc {\a}{\b}{1}
+      }
+
+      \draw [arc,bend left=40] (s) to node [auto] {$n$} (t);
+    \end{tikzpicture}
+    \caption{The game $\mathcal{G}\pbet$ that the agent perceives}
+    \label{fig:lowerbet}
+  \end{subfigure}
+  \caption{A lower bound on the LPOA}
+\end{figure}
+
+As a lower bound, consider the LPOA in the one-player game shown in
+Figure~\ref{fig:lower}. Through its valuation function~\eqref{eq:val}, the agent
+perceives the game as in Figure~\ref{fig:lowerbet}. Thus, it is indifferent
+between the upper and lower paths, so taking the upper path is a valid
+equilibrium. However, the overall cost of this strategy is $n^{1/\beta}$,
+whereas the optimal social cost is $C(\s^*) = n$, corresponding to the agent
+taking the lower path. Thus, the performance ratio is $n^{1/\beta}/n =
+n^{1/\beta-1} = C(\s^*)^{1/\beta-1}$.
+
+Considering the cost functions $c_e$ to be constants, this can be extended to
+arbitrarily many players: if $k$ players play this game, a valid Nash
+equilibrium $\s\pbet$ corresponds to all players taking the top path, incurring
+a total cost of $C(\s\pbet) = kn^{1/\beta}$, when the optimal strategy profile
+$\s^*$ corresponds to all agents taking the bottom path for a total cost of
+$C(\s^*) = kn$. The performance ratio is $kn^{1/\beta}/(kn) = n^{1/\beta-1}$,
+which can again be made arbitrarily large.
+
+Thus, for all classes of functions that include constant delay functions, the
+LPOA is $\Omega(C(\s^*)^{1/\beta-1})$.
+
+\section{Upper Bound on LPOA} \label{sec:ub}
+For a game $\mathcal{G}$, let $\s^*$ be the socially optimal strategy profile
+and let ${\s^*}\pbet$ be the socially optimal strategy profile for
+$\mathcal{G}\pbet$ (i.e. if the true costs were those in $\mathcal{G}\pbet$).
+\begin{thm} \label{thm:lpoa}
+  \[
+    \text{LPOA} \le {\poab}^{1/\beta} C(\s^*)^{1/\beta-1}
+  \]
+\end{thm}
+\begin{proof}
+  Since by Lemma~\ref{lem:scale} scaling $\mathcal{G}$ doesn't change the ratio
+  between $C(\s\pbet)$ and $C(\s^*)$, we can assume either $c_e(x_e) = 0$ or
+  $c_e(x_e) \ge 1$ for all $e \in E$. Thus, $c_e\pbet(x_e) \le c_e(x_e)$. This
+  means that $C\pbet({\s^*}\pbet) \le C\pbet(\s^*) \le C(\s^*)$.
+
+  By definition, we have $\poab \ge C\pbet(\s\pbet)/C\pbet({\s^*}\pbet)$, so
+  $C\pbet({\s^*}\pbet) \ge C\pbet(\s\pbet)/\poab$. Next, we observe that
+  \begin{align*}
+    C\pbet(\s\pbet)^{1/\beta} &= \p{\sum_{e \in E} x_e c(x_e)^\beta}^{1/\beta}
+    \\
+    &\ge \sum_{e \in E} x_e^{1/\beta} c(x_e) \\
+    &\ge \sum_{e \in E} x_e c(x_e) \\
+    &= C(\s\pbet)
+  \end{align*}
+  Putting this all together, we have
+  \begin{align*}
+    \frac{C(\s\pbet)}{{\poab}^{1/\beta}} &\le C(\s^*)^{1/\beta} \\
+    \frac{C(\s\pbet)}{C(\s^*)} &\le {\poab}^{1/\beta} C(\s^*)^{1/\beta-1}
+  \end{align*}
+\end{proof}
+
+
+\section{Upper Bound on POA$\pbet$} \label{sec:ubl}
+We begin by defining the notion of \textit{smoothness}, as proposed by
+Roughgarden \cite{Roughgarden2012}.
+\begin{defn}
+  A cost function $c$ is $(\lambda,\mu)$-smooth for $\lambda \ge 0$, $\mu < 1$
+  if for any $x,x' \in \Z_+$, it holds that
+  \begin{equation}
+    c(x+1) x' \le \lambda x' c(x') + \mu x c(x).
+    \label{eq:lms1}
+  \end{equation}
+  Furthermore, a family of cost functions $D$ is $(\lambda,\mu)$-smooth if every
+  $c \in D$ is $(\lambda,\mu)$-smooth
+\end{defn}
+A game $\mathcal{G}$ is $(\lambda,\mu)$-smooth if $D$ is $(\lambda,\mu)$ smooth.
+For a family $\hat{\mathcal{G}}$ of $(\lambda,\mu)$-smooth games, the price of
+anarchy for that game is at most $\frac{\lambda}{1-\mu}$ \cite{Roughgarden2012}.
+Moreover, if $\hat{\mathcal{G}}$ has a price of anarchy POA, then there exists
+some $(\lambda,\mu)$ such that $\hat{\mathcal{G}}$ is $(\lambda,\mu)$-smooth and
+$\frac{\lambda}{1-\mu} = \poa$ \cite{Roughgarden2012}. Using this, we will show
+that if POA is constant for $\hat{\mathcal{G}}$, then $\poab$ is constant as
+well.
+
+\begin{thm} \label{thm:smooth}
+  If $D$ is $(\lambda,\mu)$-smooth, then $D\pbet$ is
+  $(\lambda^\beta + \mu^\beta,\mu^\beta)$-smooth.
+\end{thm}
+\begin{proof}
+  By definition of smoothness, we know that for any $c \in D$, $c(x+1) x' \le
+  \lambda x' c(x') + \mu x c(x)$. Raising both sides to the power $\beta$, we
+  have
+  \begin{align*}
+    (c(x+1)x')^\beta &\le \p{\lambda x'c(x') + \mu xc(x)}^\beta \\
+    c(x+1)^\beta {x'}^\beta &\le \lambda^\beta {x'}^\beta c(x')^\beta + \mu^\beta
+    x^\beta c(x)^\beta \\
+    c(x+1)^\beta x' &\le \lambda^\beta x' c(x')^\beta + \mu^\beta x^\beta
+    {x'}^{1-\beta} c(x)^\beta \\
+    c\pbet(x+1) x' &\le \lambda^\beta x' c\pbet(x') + \mu^\beta x^\beta
+    {x'}^{1-\beta} c\pbet(x) \numberthis \label{eq:smooth}
+  \end{align*}
+  We consider two cases: either $x \ge x'$ or
+  $x < x'$. If $x \ge x'$, then~\eqref{eq:smooth} becomes
+  \[
+    c\pbet(x+1) x' \le \lambda^\beta x' c\pbet(x') + \mu^\beta x
+    c\pbet(x).
+  \]
+  If $x < x'$, then $c\pbet(x+1) \le c\pbet(x')$, so
+  \[
+    c\pbet(x+1) x' \le (\lambda^\beta + \mu^\beta) x' c\pbet(x').
+  \]
+  In either case,
+  \[
+    c\pbet(x+1) x' \le (\lambda^\beta + \mu^\beta) x' c\pbet(x') + \mu^\beta x
+    c\pbet(x).
+  \]
+  Since this holds for all $c\pbet \in D\pbet$, $D\pbet$ is $(\lambda^\beta +
+  \mu^\beta, \mu^\beta)$ smooth.
+\end{proof}
+
+From Roughgarden, we know that for any $D$ with finite $\poa$, there exists
+$\lambda,\mu$ such that $D$ is $(\lambda,\mu)$-smooth \cite{Roughgarden2012}.
+Since $\poab \le \frac{\lambda^\beta + \mu^\beta}{1-\mu^\beta}$, if $D$ has
+finite $\poa$, then $\poab$ is finite as well. This yields our main result:
+\begin{thm} \label{thm:main}
+ For any class of delay functions with finite $\poa$, $\lpoa =
+ \Theta(C(\s^*)^{1/\beta-1})$.
+\end{thm}
+\begin{proof}
+  The lower bound comes from Section~\ref{sec:lb}, while the upper bound comes
+  from combining Theorems~\ref{thm:lpoa} and~\ref{thm:smooth}.
+\end{proof}
+
+
+%Furthermore, we take the definition of \textit{biased smoothness} from Meir and
+%Parkes.
+%\begin{defn}
+  %The class of functions $D$ is $(\lambda,\mu)$-biased-smooth with respect to
+  %$\beta$ if for any cost function $c \in D$ and any $x,x' \in \Z_+$,
+  %\begin{equation}
+    %c(x)x + c\pbet(x)(x' - x) \le \lambda c(x') x' + \mu c(x)x.
+    %\label{eq:lmbs}
+  %\end{equation}
+%\end{defn}
+%The following theorem, proved by Meir and Parkes for nonatomic congestion games,
+%holds for atomic congestion games as well \cite{Meir2014}.
+%\begin{thm}
+  %For a game $\mathcal{G}$ with congestion functions $D$ $(\hat \lambda,\hat
+  %\mu)$-biased-smooth, if $\s$ is an equilibrium and $\s^*$ is any other state,
+  %then $C\pbet(\s) \le \frac{\hat \lambda}{1-\hat \mu} C\pbet(\s^*)$.
+%\end{thm}
+%\begin{proof}
+  %By the Nash equilibrium condition, $\sum_{e \in E} c_e\pbet(x_e) x_e \le
+  %\sum_{e \in E} c_e\pbet(x_e)x_e^*$. As noted by Meir and Parkes, this yields
+  %\cite{Meir2014}
+  %\begin{align*}
+    %C\pbet(\s) &= \sum_{e \in E} c\pbet(x_e) x_e \\
+    %&\le \sum_{e \in E} c_e\pbet(x_e) x_e^* \\
+    %&\le \sum_{e \in E} c_e\pbet(x_e) x_e^* + c_e\pbet(x_e)(x_e^* - x_e) \\
+    %&\le \sum_{e \in E} \hat \lambda c(x_e^*)x_e^* + \mu c\pbet(x_e)x_e
+  %\end{align*}
+%\end{proof}
 
 \section{Open Questions}
 
