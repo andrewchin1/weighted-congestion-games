@@ -44,7 +44,7 @@ shows people are \textit{risk-seeking} when it comes to costs -- for example,
 people prefer an 80\% chance of losing \$4,000 to a sure loss of \$3,000,
 despite the expected loss being higher \cite{Kahneman1979}.
 
-This bias leads to suboptimal behavior
+%This bias leads to suboptimal behavior
 
 \section{A Motivating Example}
 
@@ -79,13 +79,14 @@ show a matching upper bound of $O(C(\s^*)^{1/\beta - 1})$.
 \section{The Model}
 
 Here we present a framework to model lowball agents in congestion games. A
-\textit{lowball agent} evaluates costs according to
+\textit{lowball agent} evaluates costs according to the valuation function
 \begin{equation}
   V(x) = x^{\beta}
   \label{eq:val}
 \end{equation}
-for $0 < \beta \le 1$ \cite{Rieger2008}. For the remainder of this paper, we
-assume that each agent has the same parameter $\beta$.
+defined by Rieger and Wang for $0 < \beta \le 1$ \cite{Rieger2008}. For the
+remainder of this paper, we assume that each agent has the same parameter
+$\beta$.
 
 An atomic congestion game, $\mathcal{G} = (G, D, P, k)$, is a
 cost-minimization game parametrized by a directed graph $G$, a set of increasing
