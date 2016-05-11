@@ -17,19 +17,16 @@
 
 \begin{abstract}
 
-  Research shows that people aren't rational in evaluating costs --
-  instead, they systematically undervalue them in a nonlinear fashion
+  Research shows that people aren't rational in evaluating costs -- instead,
+  they systematically undervalue them in a nonlinear fashion
   \cite{Kahneman1979}. Prospect theory seeks to describe and model this
   behavior. We consider the effects of this bias on agents in atomic congestion
-  games, bounding its negative effects on social performance. We extend the
-  biased-smoothness framework proposed by Meir and Parkes to atomic congestion
-  games and apply it to the cost-biased agents that prospect theory puts forth
-  \cite{Meir2014}. We show regardless of the class of delay functions used, the
-  ratio between the performance of biased agents and the social optimum grows
-  with the size of the game. Roughly speaking, our findings indicate that people
-  misunderstand the additivity of costs, preferring one large cost over a large
-  number of smaller costs, even when it is not in their rational interest to do
-  so.
+  games, bounding its negative effects on social performance. We show regardless
+  of the class of delay functions used, the ratio between the performance of
+  biased agents and the social optimum grows with the size of the game. Roughly
+  speaking, our findings indicate that people misunderstand the additivity of
+  costs, preferring one large cost over a large number of smaller costs, even
+  when it is not in their rational interest to do so.
 
 \end{abstract}
 
@@ -44,7 +41,12 @@ shows people are \textit{risk-seeking} when it comes to costs -- for example,
 people prefer an 80\% chance of losing \$4,000 to a sure loss of \$3,000,
 despite the expected loss being higher \cite{Kahneman1979}.
 
-%This bias leads to suboptimal behavior
+As a result, classical game theory fails to accurately characterize what happens
+when people interact with each other. Accounting for these biases in games has
+lead to ``behavioral game theory,'' which assumes that biased agents perceive a
+different version of the game, within which they act rationally \cite{Meir2014}.
+This paper seeks to bring prospect theory and behavioral game theory together,
+the combination of which, to our knowledge, is novel.
 
 \section{A Motivating Example}
 
@@ -54,16 +56,21 @@ equilibrium and the socially optimal solution in a game, and intuitively gives
 an upper bound on how closely the Nash equilibrium approximates the optimal
 solution \cite{Koutsoupias2009}. It has been extensively studied in atomic
 congestion games with rational agents, with tight matching lower and upper
-bounds shown for various classes of cost funtions \cite{Aland2011}
-\cite{Roughgarden2012}. Tim Roughgarden introduced the smooth analysis framework
-to not only bound the price of anarchy, but also to construct worst-case
-examples to provide matching lower bounds \cite{Roughgarden2012}.
+bounds shown for various classes of cost funtions
+\cite{Aland2011,Roughgarden2012}. Tim Roughgarden introduced the smooth analysis
+framework to not only bound the price of anarchy, but also to construct
+worst-case examples to provide matching lower bounds \cite{Roughgarden2012}.
 
 While classical game theory relies on the assumption of rational agents, recent
 work has sought to model agents with various behavioral biases. For example,
 Reshef Meir and David Parkes consider the effects of behavioral biases in
 nonatomic congestion games, applying smoothness arguments to upper bound the
-price of anarchy \cite{Meir2014}.
+``biased price of anarchy'' \cite{Meir2014}. In particular, they show that the
+biased price of anarchy can be bounded as long as the agents being considered
+satisfy a certain smoothness property with respect to the class of delay
+functions; however, this approach is not applicable for the agents we consider
+because the biased price of anarchy is unbounded for any class of delay
+functions.
 
 \section{Overview of Results}
 Broadly, we answer the question ``what is the price of anarchy when agents
@@ -74,7 +81,8 @@ of anarchy when these agents play atomic congestion games.
 In Section~\ref{sec:lb}, we show that for an atomic congestion game with
 socially optimal strategy profile $\s^*$, the ``lowball price of anarchy'' is
 $\Omega(C(\s^*)^{1/\beta-1})$. In Sections~\ref{sec:ub} and~\ref{sec:ubl}, we
-show a matching upper bound of $O(C(\s^*)^{1/\beta - 1})$.
+show a matching upper bound of $O(C(\s^*)^{1/\beta - 1})$, as long as the delay
+functions being used are ``smooth.''
 
 \section{The Model}
 
@@ -88,16 +96,15 @@ defined by Rieger and Wang for $0 < \beta \le 1$ \cite{Rieger2008}. For the
 remainder of this paper, we assume that each agent has the same parameter
 $\beta$.
 
-An atomic congestion game, $\mathcal{G} = (G, D, P, k)$, is a
-cost-minimization game parametrized by a directed graph $G$, a set of increasing
-delay functions $D = \{c_e : \mathbb{Z}_{>0} \to \mathbb{R}\}$, a set of start
-and end points for each player $P =\{(s_1, t_1), \cdots, (s_k, t_k)\}$, and $k$
-players.
+An atomic congestion game, $\mathcal{G} = (G, D, P, k)$, is a cost-minimization
+game parametrized by a directed graph $G$, a set of nondecreasing delay
+functions $D = \{c_e : \mathbb{Z}_{>0} \to \mathbb{R}\}$, a set of start and end
+points for each player $P =\{(s_1, t_1), \cdots, (s_k, t_k)\}$, and $k$ players.
 
 Lowball agents perceive congestion games by applying the valuation
 function~\eqref{eq:val} to each edge's delay function, $c_e(x)$, leading them to
 perceive the game as $\mathcal{G}\pbet= (G, D\pbet, P, k)$ where $D\pbet =
-\{c_e\pbet(x)\}$ where $c_e\pbet(x) = (c_e(x))^\beta$. Within this new
+\{c_e\pbet(x)\}$, i.e. $c_e\pbet(x) = (c_e(x))^\beta$. Within this new
 congestion game $\mathcal{G}\pbet$, the lowball agents act rationally: however
 the true costs they incur are reflected by the delay functions in $\mathcal{G}$.   
 
@@ -249,6 +256,8 @@ LPOA is $\Omega(C(\s^*)^{1/\beta-1})$.
 For a game $\mathcal{G}$, let $\s^*$ be the socially optimal strategy profile
 and let ${\s^*}\pbet$ be the socially optimal strategy profile for
 $\mathcal{G}\pbet$ (i.e. if the true costs were those in $\mathcal{G}\pbet$).
+Furthermore, let $\poab$ be the price of anarchy for games with cost functions in
+$D\pbet$.
 \begin{thm} \label{thm:lpoa}
   \[
     \text{LPOA} \le {\poab}^{1/\beta} C(\s^*)^{1/\beta-1}
@@ -277,7 +286,7 @@ $\mathcal{G}\pbet$ (i.e. if the true costs were those in $\mathcal{G}\pbet$).
 \end{proof}
 
 
-\section{Upper Bound on POA$\pbet$} \label{sec:ubl}
+\section{Finiteness of POA$\pbet$} \label{sec:ubl}
 We begin by defining the notion of \textit{smoothness}, as proposed by
 Roughgarden \cite{Roughgarden2012}.
 \begin{defn}
@@ -296,8 +305,7 @@ anarchy for that game is at most $\frac{\lambda}{1-\mu}$ \cite{Roughgarden2012}.
 Moreover, if $\hat{\mathcal{G}}$ has a price of anarchy POA, then there exists
 some $(\lambda,\mu)$ such that $\hat{\mathcal{G}}$ is $(\lambda,\mu)$-smooth and
 $\frac{\lambda}{1-\mu} = \poa$ \cite{Roughgarden2012}. Using this, we will show
-that if POA is constant for $\hat{\mathcal{G}}$, then $\poab$ is constant as
-well.
+that if POA is constant for $\hat{\mathcal{G}}$, then \poab is constant as well.
 
 \begin{thm} \label{thm:smooth}
   If $D$ is $(\lambda,\mu)$-smooth, then $D\pbet$ is
@@ -338,7 +346,7 @@ well.
 From Roughgarden, we know that for any $D$ with finite $\poa$, there exists
 $\lambda,\mu$ such that $D$ is $(\lambda,\mu)$-smooth \cite{Roughgarden2012}.
 Since $\poab \le \frac{\lambda^\beta + \mu^\beta}{1-\mu^\beta}$, if $D$ has
-finite $\poa$, then $\poab$ is finite as well. This yields our main result:
+finite $\poa$, then \poab is finite as well. This yields our main result:
 \begin{thm} \label{thm:main}
  For any class of delay functions with finite $\poa$, $\lpoa =
  \Theta(C(\s^*)^{1/\beta-1})$.
@@ -348,12 +356,13 @@ finite $\poa$, then $\poab$ is finite as well. This yields our main result:
   from combining Theorems~\ref{thm:lpoa} and~\ref{thm:smooth}.
 \end{proof}
 
-\subsection{An Explicit Bound on $\poab$ for Polynomial Delay Functions}
+\subsection{An Explicit Bound on \poab for Polynomial Delay Functions}
 If $D$ contains only polynomial delay functions of degree at most $d$, i.e.
 $c_e(x) = \sum_{i=0}^d a_{e,i} x_e^i$,\footnote{We use the convention that $0^0
-= 1$.} we can construct an explicit bound for $\poab$, and thus for $\lpoa$. We
-so using analagous reasoning to Awerbuch et al., who give a bound on the price
-of anarchy for polynomial delay functions \cite{Awerbuch2005}.
+= 1$.} we can construct an explicit bound for \poab and thus for $\lpoa$. We
+so using analagous reasoning to Awerbuch et al., who show that for polynomial
+delay functions of degree $d$, the price of anarchy is $O(2^d d^{d+1})$
+\cite{Awerbuch2005}.
 
 First, we need the following Lemma, proven by Awerbuch et al.
 \cite{Awerbuch1995}.
@@ -479,8 +488,9 @@ First, we need the following Lemma, proven by Awerbuch et al.
   \begin{align*}
     \p{\frac{C\pbet(\s)}{C\pbet(\s^*)}}^{1/(d\beta+1)} &\le 2(d+1) \\
     \frac{C\pbet(\s)}{C\pbet(\s^*)} &\le \p{2(d+1)}^{d\beta+1} \\
-    &= O(2^{d\beta} d^{d\beta+1})
+    &= O(2^{d\beta} d^{d\beta+1}),
   \end{align*}
+  which proves the theorem.
 \end{proof}
 
 %Furthermore, we take the definition of \textit{biased smoothness} from Meir and
@@ -513,10 +523,12 @@ First, we need the following Lemma, proven by Awerbuch et al.
 %\end{proof}
 
 \section{Open Questions}
-\begin{itemize}
-  \item Mixture of agents with different $\beta$.
-  \item Is $\poab \le \poa$?
-\end{itemize}
+Throughout this paper, we have assumed that each agent has the same bias
+parameter $\beta$. For a mixture of agents with different biases, one could ask
+if an analogous upper bound on the LPOA can be derived.
+
+Furthermore, while we have shown that $\poab$ is finite as long as $\poa$ is
+finite, it is an open question whether $\poab \le \poa$ in all cases.
 
 \printbibliography
 
