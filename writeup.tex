@@ -122,25 +122,38 @@ each $s_i \in S_i$ for each $i$, we can evaulate the perceived cost of
 $\mathbf{s}$ (ie the cost in $\mathcal{G}\pbet$) and actual cost that will be
 incurred (the cost in $\mathcal{G}$).
 
-In addition, we'll define for a strategy profile $\mathbf{s}$, the true cost to
-player $i$ to be: \[C_i(s) = \sum\limits_{e \in s_i}c_e(x_e)\] where
-$\mathbf{x}$ is the vector of the number of players on each edge induced by
-$\mathbf{s}$.  And the perceived cost to player $i$ is: \[C\pbet_i(s) =
-\sum\limits_{e \in s_i}c_e\pbet(x_e) = \sum\limits_{e \in s_i}c_e(x_e)^\beta\]
-From this, we know the total social cost is: \[C(\mathbf{s}) =
-\sum_{i=1}^{k}C_i(\mathbf{s})\]
+In addition, we define the true cost to player $i$ for a strategy profile
+$\mathbf{s}$ to be
+\[
+  C_i(\s) = \sum\limits_{e \in s_i}c_e(x_e),
+\]
+where $\mathbf{x}
+\in \Z^E$ is the vector of the number of players on each edge induced by
+$\mathbf{s}$.  The perceived cost to player $i$ is
+\[
+  C\pbet_i(\s) = \sum\limits_{e \in s_i}c_e\pbet(x_e) = \sum\limits_{e \in
+  s_i}c_e(x_e)^\beta.
+\]
+From this, we know the total social cost is
+\[
+  C(\mathbf{s}) = \sum_{i=1}^{k}C_i(\mathbf{s}).
+\]
         
-Traditionally we define the \textit{price of anarchy (POA)} to be the ratio
+Traditionally, the \textit{price of anarchy (POA)} is defined as the ratio
 between the worst Nash equilibrium and the overall optimum solution
 \cite{Koutsoupias2009}.  In more precise terms, the price of anarchy for a
-family of games $\hat{\mathcal{G}}$ is \[\sup_{\mathcal{G} \in \hat{\mathcal{G}}}
-\frac{C(\s)}{C(\s^*)}\] where $\s$ is a Nash equilibrium of $\mathcal{G}$ and
-$\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.
+family of games $\hat{\mathcal{G}}$ is
+\[
+  \sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s)}{C(\s^*)},
+\]
+where $\s$ is a Nash equilibrium of $\mathcal{G}$ and $\s^*$ is the overall
+optimum strategy profile of $\mathcal{G}$.
 
 \begin{defn}
-  The \textit{lowball price of anarchy (LPOA)} is
+  The \textit{lowball price of anarchy (LPOA)} for a family of congestion games
+  $\hat{\mathcal{G}}$ is
   \begin{equation}
-    \sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s\pbet)}{C(\s^*)}
+    \sup_{\mathcal{G} \in \hat{\mathcal{G}}} \frac{C(\s\pbet)}{C(\s^*)},
     \label{eq:lpoa}
   \end{equation}
   where $\s\pbet$ is a Nash equilibrium of $\mathcal{G}\pbet$ and $\s^*$ is the
@@ -149,6 +162,72 @@ $\s^*$ is the overall optimum strategy profile of $\mathcal{G}$.
 In other words, the LPOA is a ratio between the true cost of the Nash
 equilibrium reached by lowball agents and the overall optimum solution.
 
+\section{Example with Affine Delay Functions}
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
+      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
+
+      \foreach \l/\n/\p in {{s/s/(0,0)}, {v1/ /(1,0)}, {v2/ /(2,0)},
+      {t/t/(3,0)}}
+      {
+        \node [vertex] at \p (\l) {$\n$};
+      }
+
+      \foreach \a/\b in {{s/v1}, {v1/v2}, {v2/t}}
+      {
+        \Arc {\a}{\b}{$x$}
+      }
+
+      \draw [arc,bend left=40] (s) to node [auto] {$2 \cdot 3^{1/\beta}$} (t);
+    \end{tikzpicture}
+    \caption{A game $\mathcal{G}$ with affine delay functions}
+    \label{fig:affine}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
+      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
+
+      \foreach \l/\n/\p in {{s/s/(0,0)}, {v1/ /(1,0)}, {v2/ /(2,0)},
+      {t/t/(3,0)}}
+      {
+        \node [vertex] at \p (\l) {$\n$};
+      }
+
+      \foreach \a/\b in {{s/v1}, {v1/v2}, {v2/t}}
+      {
+        \Arc {\a}{\b}{$x^\beta$}
+      }
+
+      \draw [arc,bend left=40] (s) to node [auto] {$3\cdot 2^\beta$} (t);
+    \end{tikzpicture}
+    \caption{The game $\mathcal{G}\pbet$ that the agents perceive}
+    \label{fig:affinebet}
+  \end{subfigure}
+  \caption{The original game $\mathcal{G}$ and the perceived game
+  $\mathcal{G}\pbet$}
+\end{figure}
+Consider the two-player game shown in Figure~\ref{fig:affine}. Assume $\beta =
+1/2$. Then, the cost of taking the top path is $2 \cdot 9 = 18$. However, if
+both players take the bottom path, each incurs a cost of 6. Thus, for rational
+agents, the Nash equilibrium and the socially optimal strategy are the same --
+both players take the bottom path.
+
+However, through the valuation function~\eqref{eq:val}, the agents perceive this
+as the game shown in Figure~\ref{fig:affinebet}. In $\mathcal{G}\pbet$, if one
+player takes the top path, the second player is indifferent between the top and
+bottom paths, as they both have a perceived cost of $3 \cdot 2^\beta$. Thus, a
+valid Nash equilibrium is for one player to take the bottom path and the other
+to take the top path, even though this is not a Nash equilibrium in the original
+game. The true social cost of this equilibrium is $2 \cdot 3^{1/\beta} + 3 =
+21$, while the social cost of the optimal strategy profile is 12. Clearly, this
+bias can induce lowball agents to perform worse than rational agents in some
+cases. We seek to bound how much worse they can do.
+
 \section{Preliminaries}
 \begin{lem} \label{lem:scale}
   Scaling the cost functions by a constant $a > 0$, i.e. $\hat c_e(x) = a
@@ -156,12 +235,15 @@ equilibrium reached by lowball agents and the overall optimum solution.
 \end{lem}
 \begin{proof}
   $\s\pbet$ is a Nash equilibrium in $\mathcal{G}\pbet$ if and only if $\sum_{e
-  \in s_i} c_e\pbet(x_e) \le \sum_{e \in s_i'} c_e\pbet(x_e + 1)$ for all $i$.
-  After scaling the cost functions by $a$, $\s\pbet$ is still a Nash equilibrium
-  because for all $i$, $\sum_{e \in s_i} \hat c_e\pbet(x_e) = a^\beta \sum_{e
-  \in s_i} c_e\pbet(x_e) \le a^\beta \sum_{e \in s_i'} c_e\pbet(x_e + 1) =
-  \sum_{e \in s_i'} \hat c_e\pbet(x_e+1)$.
-
+  \in s_i} c_e\pbet(x_e) \le \sum_{e \in s_i'} c_e\pbet(x_e + 1)$ for all $i$
+  and for any $s_i'$. After scaling the cost functions by $a$, $\s\pbet$ is
+  still a Nash equilibrium because for all $i$,
+  \begin{align*}
+    \sum_{e \in s_i} \hat c_e\pbet(x_e) &= a^\beta \sum_{e \in s_i}
+    c_e\pbet(x_e) \\
+    &\le a^\beta \sum_{e \in s_i'} c_e\pbet(x_e + 1) \\
+    &= \sum_{e \in s_i'} \hat c_e\pbet(x_e+1).
+  \end{align*}
   Since the strategy profile remains the same, the ratio between costs is $a
   C(\s\pbet)/(a C(\s^*)) = C(\s\pbet)/C(\s^*)$.
 \end{proof}
