@@ -7,6 +7,7 @@
 \newtheorem{lem}[thm]{Lemma}
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
+\usepackage{anyfontsize}
 \usepackage[sc]{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \linespread{1.05} % Line spacing - Palatino needs more space between lines
@@ -28,7 +29,7 @@
 %\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
 %\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
 \titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
-\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\bf\fontsize{10}{12}}{\thesubsection.}{1em}{} % Change the look of the section titles
 \usepackage[backend=biber,url=false]{biblatex}
 \bibliography{congestion}
 

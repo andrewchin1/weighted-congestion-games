@@ -348,6 +348,140 @@ finite $\poa$, then $\poab$ is finite as well. This yields our main result:
   from combining Theorems~\ref{thm:lpoa} and~\ref{thm:smooth}.
 \end{proof}
 
+\subsection{An Explicit Bound on $\poab$ for Polynomial Delay Functions}
+If $D$ contains only polynomial delay functions of degree at most $d$, i.e.
+$c_e(x) = \sum_{i=0}^d a_{e,i} x_e^i$,\footnote{We use the convention that $0^0
+= 1$.} we can construct an explicit bound for $\poab$, and thus for $\lpoa$. We
+so using analagous reasoning to Awerbuch et al., who give a bound on the price
+of anarchy for polynomial delay functions \cite{Awerbuch2005}.
+
+First, we need the following Lemma, proven by Awerbuch et al.
+\cite{Awerbuch1995}.
+\begin{lem} \label{lem:ln}
+  For any $\kappa > 1$, $(x+y)^d \le \kappa x^d + (y(\frac{d}{\ln \kappa} +
+  1))^d$.
+\end{lem}
+\noindent With this, we can prove the following theorem.
+\begin{thm}
+  For polynomial delay functions of degree at most $d$ and nonnegative
+  coefficients $a_{e,i}$, $\poab = O(2^{d\beta} d^{d\beta+1})$.
+\end{thm}
+\begin{proof}
+  First, we observe that
+  \[
+    c_e\pbet(x_e) = \p{\sum_{i=0}^d a_{e,i} x_e^i}^\beta \le \sum_{i=0}^d
+    \p{a_{e,i} x_e^i}^\beta.
+  \]
+  Let $\s$ be a Nash equilibrium for $\mathcal{G}\pbet$, and let $\s^*$ be the
+  socially optimal strategy profile for $\mathcal{G}\pbet$. For each player $j$,
+  the Nash equilibrium condition gives us
+  \[
+    \sum_{e \in s_j} c_e\pbet(x_e) \le \sum_{e \in s_j^*} c_e\pbet(x_e + 1)
+  \]
+  Summing over all players, we get
+  \[
+    C\pbet(\s) = \sum_{j=1}^k \sum_{e \in s_j} c_e\pbet(x_e) \le \sum_{e
+    \in E} x_e^* c_e\pbet(x_e + 1)
+  \]
+  We can bound this by
+  \begin{align*}
+    \sum_{e \in E} x_e^* c_e\pbet(x_e + 1) &= \sum_{e \in E} x_e^*
+    \p{\sum_{i=0}^d a_{e,i} (x_e+1)^i}^\beta \\
+    &\le \sum_{e \in E} x_e^* \p{\sum_{i=0}^d a_{e,i} \p{\kappa x_e^i +
+      \p{\frac{i}{\ln \kappa} + 1}^i}}^\beta \\
+    &\le \sum_{e \in E} x_e^* \p{\sum_{i=0}^d a_{e,i} \p{\kappa x_e^i +
+      \p{\frac{d}{\ln \kappa} + 1}^d}}^\beta \\
+    &\le \kappa \sum_{e \in E} \sum_{i=0}^d a_{e,i}^\beta x_e^* x_e^{i\beta} \\
+    &+ \p{\frac{d}{\ln \kappa} + 1}^{d\beta} \sum_{e \in E} x_e^*
+    \p{\sum_{i=0}^d a_{e,i}}^\beta \numberthis \label{eq:twopart}
+  \end{align*}
+  where the first inequality comes from Lemma~\ref{lem:ln}, second inequality
+  follows because $(\frac{x}{\ln \kappa} + 1)^x$ is an increasing function for
+  $x \ge 0$, and the third inequality holds because $V(x) = x^\beta$ is concave.
+  Furthermore,
+  \[
+    x_e^* \p{\sum_{i=0}^d a_{e,i}}^\beta \le x_e^* \p{\sum_{i=0}^d a_{e,i}
+    {x_e^*}^i}^\beta
+  \]
+  because either $x_e^* = 0$, in which case both sides are 0, or $x_e^* \ge 1$,
+  in which case ${x_e^*}^i \ge 1$. This gives us
+  \begin{align*}
+    \p{\frac{d}{\ln \kappa} + 1}^{d\beta} \sum_{e \in E} x_e^* {\sum_{i=0}^d
+    a_{e,i}}^\beta &\le \p{\frac{d}{\ln \kappa} + 1}^{d\beta} \sum_{e \in E}
+    x_e^* \p{\sum_{i=0}^d a_{e,i}
+    {x_e^*}^i}^\beta \\
+    &= \p{\frac{d}{\ln \kappa} + 1}^{d\beta} C\pbet(\s^*).
+  \end{align*}
+  Next, we bound the other term in~\eqref{eq:twopart}, we can rearrange as
+  \[
+    \kappa\sum_{i=0}^d \sum_{e \in E} a_{e,i}^\beta x_e^* x_e^{i\beta}.
+  \]
+  We use Holder's Inequality, which states that for $\delta + \gamma = 1$,
+  \[
+    \sum_e v_e^\delta w_e^\gamma \le \p{\sum_e v_e}^\delta \p{\sum_e w_e}^\gamma.
+  \]
+  Choosing $\delta = \frac{i\beta}{i\beta + 1}$, $\gamma = \frac{1}{i\beta +
+  1}$, $v_e = a_{e,i}^\beta x_e^{i\beta + 1}$, and $w_e = a_{e,i}^\beta
+  {x_e^*}^{i\beta + 1}$, we have
+  \begin{align*}
+    \kappa\sum_{i=0}^d \sum_{e \in E} a_{e,i}^\beta x_e^* x_e^{i\beta} &\le
+    \kappa \sum_{i=0}^d \p{\sum_{e \in E} a_{e,i}^\beta x_e^{i\beta +
+    1}}^{i\beta/(i\beta+1)} \\
+    &\cdot \p{\sum_{e \in E} a_{e,i}^\beta {x_e^*}^{i\beta +
+    1}}^{1/(i\beta+1)}
+  \end{align*}
+  Since $a_{e,i}$ is nonnegative, for any $i$,
+  \[
+    a_{e,i}^\beta x_e^{i\beta+1} \le x_e \p{\sum_{\ell=0}^d a_{e,\ell}
+    x_e^{\ell}}^\beta,
+  \]
+  as the left hand side is just one term in the summation on the right hand
+  side and $V(x) = x^\beta$ is an increasing function. Since $C\pbet(\s) =
+  \sum_{e \in E} x_e \p{\sum_{\ell=0}^d a_{e,\ell} x_e^\ell}^\beta$, we have
+  \begin{align*}
+    \kappa\sum_{i=0}^d \sum_{e \in E} a_{e,i}^\beta x_e^* x_e^{i\beta} &\le
+    \kappa \sum_{i=0}^d C\pbet(\s)^{i\beta/(i\beta+1)}
+    C\pbet(\s^*)^{1/(i\beta+1)} \\
+  \end{align*}
+  For $x \ge y \ge 0$ and $1 \ge \alpha \ge \alpha' \ge 0$,
+  \[
+    x^\alpha y^{1-\alpha} \ge x^{\alpha'} y^{1-\alpha'}.
+  \]
+  Using this,
+  \begin{align*}
+    \kappa\sum_{i=0}^d &C\pbet(\s)^{i\beta/(i\beta+1)}
+    C\pbet(\s^*)^{1/(i\beta+1)} \\
+    &\le \kappa\sum_{i=0}^d C\pbet(\s)^{d\beta/(d\beta+1)}
+    C\pbet(\s^*)^{1/(d\beta+1)} \\
+    &= \kappa(d+1)C\pbet(\s)^{d\beta/(d\beta+1)}
+    C\pbet(\s^*)^{1/(d\beta+1)}
+  \end{align*}
+  Combining these results with~\eqref{eq:twopart}, we have
+  \begin{align*}
+    C\pbet(\s) &\le \kappa(d+1)C\pbet(\s)^{d\beta/(d\beta+1)}
+    C\pbet(\s^*)^{1/(d\beta+1)} \\
+    &+ \p{\frac{d}{\ln \kappa} + 1}^{d\beta} C\pbet(\s^*) \numberthis
+    \label{eq:bigpoly}
+  \end{align*}
+  Let $\rho = (C\pbet(\s)/C\pbet(\s^*))^{1/d\beta+1}$. Dividing both sides
+  of~\eqref{eq:bigpoly} by $C\pbet(\s^*)$, we get
+  \[
+    \rho^{d\beta+1} \le \kappa(d+1) \rho^{d\beta} + \p{\frac{d}{\ln \kappa} +
+    1}^{d\beta}
+  \]
+  Dividing both sides by $\rho^{d\beta}$, we get
+  \[
+    \rho \le \kappa(d+1) + \p{\frac{\frac{d}{\ln \kappa} +
+    1}{\rho}}^{d\beta}.
+  \]
+  Choosing $\kappa = 2-\p{\frac{1}{2}}^{d\beta}$, we get $\rho \le 2(d+1)$. This
+  yields
+  \begin{align*}
+    \p{\frac{C\pbet(\s)}{C\pbet(\s^*)}}^{1/(d\beta+1)} &\le 2(d+1) \\
+    \frac{C\pbet(\s)}{C\pbet(\s^*)} &\le \p{2(d+1)}^{d\beta+1} \\
+    &= O(2^{d\beta} d^{d\beta+1})
+  \end{align*}
+\end{proof}
 
 %Furthermore, we take the definition of \textit{biased smoothness} from Meir and
 %Parkes.
@@ -379,6 +513,10 @@ finite $\poa$, then $\poab$ is finite as well. This yields our main result:
 %\end{proof}
 
 \section{Open Questions}
+\begin{itemize}
+  \item Mixture of agents with different $\beta$.
+  \item Is $\poab \le \poa$?
+\end{itemize}
 
 \printbibliography
 
