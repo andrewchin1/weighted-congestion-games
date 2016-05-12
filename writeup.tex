@@ -405,45 +405,82 @@ $\frac{\lambda}{1-\mu} = \poa$ \cite{Roughgarden2012}. Using this, we will show
 that if POA is constant for $\hat{\mathcal{G}}$, then \poab is constant as well.
 
 \begin{thm} \label{thm:smooth}
-  If $D$ is $(\lambda,\mu)$-smooth, then $D\pbet$ is
-  $(\lambda^\beta + \mu^\beta,\mu^\beta)$-smooth.
+  If $D$ is $(\lambda,\mu)$-smooth, then $D\pbet$ is $(\max\{1,\lambda^\beta +
+  \mu^\beta\},\mu^\beta)$-smooth.
 \end{thm}
 \begin{proof}
-  By definition of smoothness, we know that for any $c \in D$, $c(x+1) x' \le
-  \lambda x' c(x') + \mu x c(x)$. Raising both sides to the power $\beta$, we
+  Consider any $c \in D$. Since $\Delta(x) = c(x) - \tau$ belongs to the same
+  class of functions as $c(x)$, $\Delta(x)$ must also be $(\lambda,\mu)$-smooth.
+  We will show that $\Delta\pbet(x) = (c(x) - \tau)^\beta$ is $(\lambda^\beta +
+  \mu^\beta,\mu^\beta)$-smooth.
+
+  By definition of smoothness, we know that $\Delta(x+1) x' \le \lambda x'
+  \Delta(x') + \mu x \Delta(x)$. Raising both sides to the power $\beta$, we
   have
   \begin{align*}
-    (c(x+1)x')^\beta &\le \p{\lambda x'c(x') + \mu xc(x)}^\beta \\
-    c(x+1)^\beta {x'}^\beta &\le \lambda^\beta {x'}^\beta c(x')^\beta + \mu^\beta
-    x^\beta c(x)^\beta \\
-    c(x+1)^\beta x' &\le \lambda^\beta x' c(x')^\beta + \mu^\beta x^\beta
-    {x'}^{1-\beta} c(x)^\beta \\
-    c\pbet(x+1) x' &\le \lambda^\beta x' c\pbet(x') + \mu^\beta x^\beta
-    {x'}^{1-\beta} c\pbet(x) \numberthis \label{eq:smooth}
+    (\Delta(x+1)x')^\beta &\le \p{\lambda x'\Delta(x') + \mu x\Delta(x)}^\beta \\
+    \Delta(x+1)^\beta {x'}^\beta &\le \lambda^\beta {x'}^\beta \Delta(x')^\beta
+    + \mu^\beta x^\beta \Delta(x)^\beta \\
+    \Delta(x+1)^\beta x' &\le \lambda^\beta x' \Delta(x')^\beta + \mu^\beta
+    x^\beta {x'}^{1-\beta} \Delta(x)^\beta \\
+    \Delta\pbet(x+1) x' &\le \lambda^\beta x' \Delta\pbet(x') + \mu^\beta
+    x^\beta {x'}^{1-\beta} \Delta\pbet(x) \numberthis \label{eq:smooth}
   \end{align*}
   We consider two cases: either $x \ge x'$ or
   $x < x'$. If $x \ge x'$, then~\eqref{eq:smooth} becomes
   \[
-    c\pbet(x+1) x' \le \lambda^\beta x' c\pbet(x') + \mu^\beta x
-    c\pbet(x).
+    \Delta\pbet(x+1) x' \le \lambda^\beta x' \Delta\pbet(x') + \mu^\beta x
+    \Delta\pbet(x).
   \]
-  If $x < x'$, then $c\pbet(x+1) \le c\pbet(x')$, so
+  If $x < x'$, then $\Delta\pbet(x+1) \le \Delta\pbet(x')$, so
   \[
-    c\pbet(x+1) x' \le (\lambda^\beta + \mu^\beta) x' c\pbet(x').
+    \Delta\pbet(x+1) x' \le (\lambda^\beta + \mu^\beta) x' \Delta\pbet(x').
   \]
   In either case,
+  \begin{equation}
+    \Delta\pbet(x+1) x' \le (\lambda^\beta + \mu^\beta) x' \Delta\pbet(x') +
+    \mu^\beta x \Delta\pbet(x).
+    \label{eq:deltasmooth}
+  \end{equation}
+  Finally, we must show that the smoothness equation holds for $c\pbet$. To do
+  so, we observe that there are again two cases: Either $\lambda^\beta +
+  \mu^\beta \ge 1$ or not. If $\lambda^\beta + \mu^\beta \ge 1$, then
   \[
-    c\pbet(x+1) x' \le (\lambda^\beta + \mu^\beta) x' c\pbet(x') + \mu^\beta x
-    c\pbet(x).
+    \tau x' \le \tau(\lambda^\beta + \mu^\beta)x' + \tau\mu^\beta x,
   \]
-  Since this holds for all $c\pbet \in D\pbet$, $D\pbet$ is $(\lambda^\beta +
-  \mu^\beta, \mu^\beta)$-smooth.
+  meaning
+  \begin{align*}
+    (\Delta\pbet(x+1) + \tau) x' &\le (\lambda^\beta + \mu^\beta) x'
+    (\Delta\pbet(x') + \tau) \\
+    &+ \mu^\beta x (\Delta\pbet(x) + \tau) \\
+    c\pbet(x+1) x' &\le (\lambda^\beta + \mu^\beta) x' c\pbet(x') +
+    \mu^\beta x c\pbet(x).
+  \end{align*}
+  Otherwise, $\lambda^\beta + \mu^\beta < 1$, so~\eqref{eq:deltasmooth} becomes
+  \[
+    \Delta\pbet(x+1) x' \le x' \Delta\pbet(x') +
+    \mu^\beta x \Delta\pbet(x).
+  \]
+  Furthermore,
+  \[
+    \tau x' \le \tau x' + \tau\mu^\beta x,
+  \]
+  so
+  \begin{align*}
+    (\Delta\pbet(x+1) + \tau) x' &\le x' (\Delta\pbet(x') + \tau)
+    + \mu^\beta x (\Delta\pbet(x) + \tau) \\
+    c\pbet(x+1) x' &\le (\lambda^\beta + \mu^\beta) x' c\pbet(x') +
+    \mu^\beta x c\pbet(x).
+  \end{align*}
+  Since this holds for all $c\pbet \in D\pbet$, $D\pbet$ is
+  $(\max\{\lambda^\beta + \mu^\beta\}, \mu^\beta)$-smooth.
 \end{proof}
 
 From Roughgarden, we know that for any $D$ with finite $\poa$, there exists
 $\lambda,\mu$ such that $D$ is $(\lambda,\mu)$-smooth \cite{Roughgarden2012}.
-Since $\poab \le \frac{\lambda^\beta + \mu^\beta}{1-\mu^\beta}$, if $D$ has
-finite $\poa$, then \poab is finite as well. This yields our main result:
+Since $\poab \le \max\left\{\frac{\lambda^\beta +
+\mu^\beta}{1-\mu^\beta}, \frac{1}{1-\mu^\beta}\right\}$, if $D$ has finite
+$\poa$, then \poab is finite as well. This yields our main result:
 \begin{thm} \label{thm:main}
  For any class of delay functions with finite $\poa$, $\lpoa =
  \Theta(C(\s^*)^{1/\beta-1})$.
@@ -473,11 +510,11 @@ First, we need the following Lemma, proven by Awerbuch et al.
   coefficients $a_{e,i}$, $\poab = O(2^{d\beta} d^{d\beta+1})$.
 \end{thm}
 \begin{proof}
-  First, we observe that
-  \[
-    c_e\pbet(x_e) = \p{\sum_{i=0}^d a_{e,i} x_e^i}^\beta \le \sum_{i=0}^d
-    \p{a_{e,i} x_e^i}^\beta.
-  \]
+  %First, we observe that
+  %\[
+    %c_e\pbet(x_e) = \p{\sum_{i=0}^d a_{e,i} x_e^i}^\beta \le \sum_{i=0}^d
+    %\p{a_{e,i} x_e^i}^\beta.
+  %\]
   Let $\s$ be a Nash equilibrium for $\mathcal{G}\pbet$, and let $\s^*$ be the
   socially optimal strategy profile for $\mathcal{G}\pbet$. For each player $j$,
   the Nash equilibrium condition gives us
@@ -492,16 +529,28 @@ First, we need the following Lemma, proven by Awerbuch et al.
   We can bound this by
   \begin{align*}
     \sum_{e \in E} x_e^* c_e\pbet(x_e + 1) &= \sum_{e \in E} x_e^*
-    \p{\sum_{i=0}^d a_{e,i} (x_e+1)^i}^\beta \\
-    &\le \sum_{e \in E} x_e^* \p{\sum_{i=0}^d a_{e,i} \p{\kappa x_e^i +
-      \p{\frac{i}{\ln \kappa} + 1}^i}}^\beta \\
+    \p{\p{\sum_{i=0}^d a_{e,i} (x_e+1)^i}^\beta + \tau_e} \\
+    &= \sum_{e \in E} x_e^* \tau_e + \sum_{e \in E} x_e^*
+    \p{\sum_{i=0}^d a_{e,i} (x_e+1)^i}^\beta
+  \end{align*}
+  Observe that
+  \begin{equation}
+    \sum_{e \in E} x_e^* \tau_e \le C(\s^*) 
+    \label{eq:tau}
+  \end{equation}
+  because $\tau_e \le C(x_e^*)$ for all $e$. The remaining term is
+  \begin{align*}
+    \sum_{e \in E} x_e^*& \p{\sum_{i=0}^d a_{e,i} (x_e+1)^i}^\beta \\
+    &\le \sum_{e
+    \in E} x_e^* \p{\sum_{i=0}^d a_{e,i} \p{\kappa x_e^i + \p{\frac{i}{\ln
+    \kappa} + 1}^i}}^\beta \\
     &\le \sum_{e \in E} x_e^* \p{\sum_{i=0}^d a_{e,i} \p{\kappa x_e^i +
       \p{\frac{d}{\ln \kappa} + 1}^d}}^\beta \\
     &\le \kappa \sum_{e \in E} \sum_{i=0}^d a_{e,i}^\beta x_e^* x_e^{i\beta} \\
     &+ \p{\frac{d}{\ln \kappa} + 1}^{d\beta} \sum_{e \in E} x_e^*
     \p{\sum_{i=0}^d a_{e,i}}^\beta \numberthis \label{eq:twopart}
   \end{align*}
-  where the first inequality comes from Lemma~\ref{lem:ln}, second inequality
+  where the first inequality comes from Lemma~\ref{lem:ln}, the second inequality
   follows because $(\frac{x}{\ln \kappa} + 1)^x$ is an increasing function for
   $x \ge 0$, and the third inequality holds because $V(x) = x^\beta$ is concave.
   Furthermore,
@@ -562,26 +611,27 @@ First, we need the following Lemma, proven by Awerbuch et al.
     &= \kappa(d+1)C\pbet(\s)^{d\beta/(d\beta+1)}
     C\pbet(\s^*)^{1/(d\beta+1)}
   \end{align*}
-  Combining these results with~\eqref{eq:twopart}, we have
+  Combining these results with~\eqref{eq:tau} and~\eqref{eq:twopart}, we
+  have
   \begin{align*}
     C\pbet(\s) &\le \kappa(d+1)C\pbet(\s)^{d\beta/(d\beta+1)}
     C\pbet(\s^*)^{1/(d\beta+1)} \\
-    &+ \p{\frac{d}{\ln \kappa} + 1}^{d\beta} C\pbet(\s^*) \numberthis
+    &+ \p{\p{\frac{d}{\ln \kappa} + 1}^{d\beta} + 1} C\pbet(\s^*) \numberthis
     \label{eq:bigpoly}
   \end{align*}
   Let $\rho = (C\pbet(\s)/C\pbet(\s^*))^{1/d\beta+1}$. Dividing both sides
   of~\eqref{eq:bigpoly} by $C\pbet(\s^*)$, we get
   \[
     \rho^{d\beta+1} \le \kappa(d+1) \rho^{d\beta} + \p{\frac{d}{\ln \kappa} +
-    1}^{d\beta}
+    1}^{d\beta} + 1
   \]
   Dividing both sides by $\rho^{d\beta}$, we get
   \[
     \rho \le \kappa(d+1) + \p{\frac{\frac{d}{\ln \kappa} +
-    1}{\rho}}^{d\beta}.
+    1}{\rho}}^{d\beta} + \frac{1}{\rho}.
   \]
-  Choosing $\kappa = 2-\p{\frac{1}{2}}^{d\beta}$, we get $\rho \le 2(d+1)$. This
-  yields
+  Choosing $\kappa = 2-\p{\frac{1}{2}}^{d\beta} - \frac{1}{2(d+1)}$, we get
+  $\rho \le 2(d+1)$. This yields
   \begin{align*}
     \p{\frac{C\pbet(\s)}{C\pbet(\s^*)}}^{1/(d\beta+1)} &\le 2(d+1) \\
     \frac{C\pbet(\s)}{C\pbet(\s^*)} &\le \p{2(d+1)}^{d\beta+1} \\
