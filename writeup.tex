@@ -251,10 +251,12 @@ cases. We seek to understand how much worse they can do.
   and for any $s_i'$. After scaling the cost functions by $a$, $\s\pbet$ is
   still a Nash equilibrium because for all $i$,
   \begin{align*}
-    \sum_{e \in s_i} \hat c_e\pbet(x_e) &= a^\beta \sum_{e \in s_i}
-    c_e\pbet(x_e) \\
-    &\le a^\beta \sum_{e \in s_i'} c_e\pbet(x_e + 1) \\
-    &= \sum_{e \in s_i'} \hat c_e\pbet(x_e+1).
+    \sum_{e \in s_i} \hat c_e\pbet(x_e) &= \sum_{e \in s_i} a\tau_e +
+    (a\Delta_e(x))^\beta \\
+    &= a \sum_{e \in s_i} \tau_e + a^\beta \sum_{e \in s_i} \Delta_e(x)^\beta
+    %&= a^\beta \sum_{e \in s_i} c_e\pbet(x_e) \\
+    %&\le a^\beta \sum_{e \in s_i'} c_e\pbet(x_e + 1) \\
+    %&= \sum_{e \in s_i'} \hat c_e\pbet(x_e+1).
   \end{align*}
   Since the strategy profile remains the same, the ratio between costs is $a
   C(\s\pbet)/(a C(\s^*)) = C(\s\pbet)/C(\s^*)$.
@@ -352,34 +354,54 @@ Furthermore, let $\poab$ be the price of anarchy for games with cost functions i
 $D\pbet$.
 \begin{thm} \label{thm:lpoa}
   \[
-    \text{LPOA} \le {\poab}^{1/\beta} C(\s^*)^{1/\beta-1}
+    \text{LPOA} = O\p{{\poab}^{1/\beta} C(\s^*)^{1/\beta-1}}
   \]
 \end{thm}
 \begin{proof}
-  Since by Lemma~\ref{lem:scale} scaling $\mathcal{G}$ doesn't change the ratio
-  between $C(\s\pbet)$ and $C(\s^*)$, we can assume either $c_e(x_e) = 0$ or
-  $c_e(x_e) \ge 1$ for all $e \in E$ and thus
+  We assume that there exists some constant $\xi$ such that either
+  $\Delta_e(x_e) \ge \xi$ or $\Delta_e(x_e) = 0$ for all $e \in E$
+  \footnote{If this not the case, then Theorem~\ref{thm:lpoa} does not hold.
+  There are pathological examples in which, as the limit as $\beta$ goes to 0,
+  the LPOA is unbounded. However, for reasonable examples, we assume that this
+  is not the case.}. If $\Delta_e(x_e) = 0$, then $c_e\pbet(x_e) = c_e(x_e)$.
+  Otherwise,
   \begin{align*}
-  c_e\pbet(x_e) &\le c_e(x_e) \quad \text{for all }e \in E \\
-  \Rightarrow C\pbet({\s^*}\pbet) &\le C\pbet(\s^*) \le C(\s^*)
+    c_e\pbet(x_e) &= \tau_e + \Delta_e(x_e)^\beta \\
+    &= \tau_e + \Delta_e(x_e) + (\Delta_e(x_e)^\beta - \Delta_e(x_e)) \\
+    &= c_e(x_e) + \Delta_e(x_e)(\Delta_e(x_e)^{\beta-1} - 1) \\
+    &\le c_e(x_e) + c_e(x_e)(\Delta_e(x_e)^{\beta-1} - 1) \\
+    &= c_e(x_e) (1 + \Delta_e(x_e)^{\beta-1}-1) \\
+    &= c_e(x_e) \Delta_e(x_e)^{\beta-1} \\
+    &\le \xi^{\beta-1} c_e(x_e)
   \end{align*}
+  In either case,
+  \begin{align*}
+    c_e\pbet(x_e) &\le \xi^{\beta-1} c_e(x_e) \quad \text{for all }e \in E
+  \end{align*}
+  Thus,
+  \[
+    C\pbet({\s^*}\pbet) \le C\pbet(\s^*) \le \xi^{\beta-1} C(\s^*)
+  \]
   Now by definition, we get 
   \begin{align*}
   \frac{C\pbet(\s\pbet)}{C\pbet({\s^*}\pbet)} &\le \poab \\
   \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le C\pbet({\s^*}\pbet) \\
-  \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le C(\s^*)
+  \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le \xi^{\beta-1} C(\s^*)
   \end{align*}
-  Next, we observe that \begin{align*}
-    C\pbet(\s\pbet)^{1/\beta} &= \p{\sum_{e \in E} x_e\p{\tau_e + \Delta_e(x_e)^\beta}}^{1/\beta}
-    \\
+  Next, we observe that
+  \begin{align*}
+    C\pbet(\s\pbet)^{1/\beta} &= \p{\sum_{e \in E} x_e\p{\tau_e +
+    \Delta_e(x_e)^\beta}}^{1/\beta} \\
     &\ge \sum_{e \in E} x_e^{1/\beta}\p{\tau_e^{1/\beta} + \Delta_e(x_e)} \\
     &\ge \sum_{e \in E} x_e\p{\tau_e + \Delta_e(x_e)} \\
     &= C(\s\pbet)
   \end{align*}
   Putting both parts together, we have
   \begin{align*}
-    \frac{C(\s\pbet)}{{\poab}^{1/\beta}} &\le C(\s^*)^{1/\beta} \\
-    \frac{C(\s\pbet)}{C(\s^*)} &\le {\poab}^{1/\beta} C(\s^*)^{1/\beta-1}
+    \frac{C(\s\pbet)}{{\poab}^{1/\beta}} &\le \xi^{1-1/\beta} C(\s^*)^{1/\beta} \\
+    \frac{C(\s\pbet)}{C(\s^*)} &\le {\poab}^{1/\beta} \xi^{1-1/\beta}
+    C(\s^*)^{1/\beta-1} \\
+    &= O\p{{\poab}^{1/\beta} C(\s^*)^{1/\beta-1}}
   \end{align*}
 \end{proof}
 
