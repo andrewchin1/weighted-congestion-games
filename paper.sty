@@ -7,6 +7,7 @@
 \newtheorem{lem}[thm]{Lemma}
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
+\usepackage{anyfontsize}
 \usepackage[sc]{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \linespread{1.05} % Line spacing - Palatino needs more space between lines
@@ -28,7 +29,7 @@
 %\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
 %\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
 \titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
-\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\bf\fontsize{10}{12}}{\thesubsection.}{1em}{} % Change the look of the section titles
 \usepackage[backend=biber,url=false]{biblatex}
 \bibliography{congestion}
 
@@ -44,9 +45,9 @@
 \newcommand{\s}{\mathbf{s}}
 \newcommand{\fix}{\textbf{FIX!!}}
 \newcommand{\cit}{\textbf{CITE!!}}
-\newcommand{\poa}{\text{POA}}
-\newcommand{\lpoa}{\text{LPOA}}
-\newcommand{\poab}{\text{POA}^{(\beta)}}
+\newcommand{\poa}{\ensuremath{\text{POA}}}
+\newcommand{\lpoa}{\ensuremath{\text{LPOA}}}
+\newcommand{\poab}{\ensuremath{\text{POA}^{(\beta)}}}
 \def\Z{\mathbb{Z}}
 \newcommand{\p}[1]{\left(#1\right)}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
