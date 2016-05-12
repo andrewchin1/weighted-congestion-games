@@ -18,15 +18,15 @@
 \begin{abstract}
 
   Research shows that people aren't rational in evaluating costs --
-  instead, they systematically undervalue them in a nonlinear fashion
-  \cite{Kahneman1979}. Prospect theory seeks to describe and model this
-  behavior. We consider the effects of this bias on agents in atomic congestion
-  games, bounding its negative effects on social performance. We extend the
+  instead, they undervalue costs in a nonlinear fashion
+  \cite{Kahneman1979}. Prospect theory seeks to model this
+  behavior. We consider the effects of agents underestimating costs in atomic congestion
+  games and bound the bias's negative effects on social performance. We extend the
   biased-smoothness framework proposed by Meir and Parkes to atomic congestion
-  games and apply it to the cost-biased agents that prospect theory puts forth
+  games and apply the framework to the cost-biased agents that prospect theory puts forth
   \cite{Meir2014}. We show regardless of the class of delay functions used, the
   ratio between the performance of biased agents and the social optimum grows
-  with the size of the game. Roughly speaking, our findings indicate that people
+  with the size of the game. In other words, our findings suggest that people
   misunderstand the additivity of costs, preferring one large cost over a large
   number of smaller costs, even when it is not in their rational interest to do
   so.
@@ -67,19 +67,18 @@ price of anarchy \cite{Meir2014}.
 
 \section{Overview of Results}
 Broadly, we answer the question ``what is the price of anarchy when agents
-underestimate costs?'' We define ``lowball agents'' as agents who underestimate
-costs following the behavioral models from prospect theory, and find the price
-of anarchy when these agents play atomic congestion games.
+underestimate costs?'' We call \textit{lowball agents}, agents who underestimate
+costs following the behavioral models from prospect theory, and study the ratio between the true cost of the Nash equilibrium reached by lowball agents and the overall optimum solution in atomic congestion games.
 
 In Section~\ref{sec:lb}, we show that for an atomic congestion game with
-socially optimal strategy profile $\s^*$, the ``lowball price of anarchy'' is
+socially optimal strategy profile $\s^*$, the \textit{lowball price of anarchy} is
 $\Omega(C(\s^*)^{1/\beta-1})$. In Sections~\ref{sec:ub} and~\ref{sec:ubl}, we
 show a matching upper bound of $O(C(\s^*)^{1/\beta - 1})$.
 
 \section{The Model}
 
-Here we present a framework to model lowball agents in congestion games. A
-\textit{lowball agent} evaluates costs according to the valuation function
+Here we present a framework to model lowball agents in congestion games. We define a 
+\textit{lowball agent} to evaluate costs according to the valuation function
 \begin{equation}
   V(x) = x^{\beta}
   \label{eq:val}
@@ -102,7 +101,7 @@ congestion game $\mathcal{G}\pbet$, the lowball agents act rationally: however
 the true costs they incur are reflected by the delay functions in $\mathcal{G}$.   
 
 Let $S_i$ be the set of all strategies for player $i$ in $\mathcal{G}$ i.e. all
-paths go from $s_i$ to $t_i$.  Note $S_i$ is also the set of all strategies for
+paths that go from $s_i$ to $t_i$.  Note $S_i$ is also the set of all strategies for
 player $i$ in $\mathcal{G}\pbet$.  Since the true costs agents incur is
 reflected in $\mathcal{G}$, it's useful to look at the difference in cost of an
 agent $i$'s strategy $s_i \in S_i$, the path it takes in the graph, with the
