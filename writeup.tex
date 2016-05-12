@@ -100,7 +100,7 @@ functions being used are ``smooth.''
 \section{The Model}
 
 Here we present a framework to model lowball agents in congestion games. We define a 
-\textit{lowball agent} to evaluate costs according to the valuation function
+\textit{lowball agent} to evaluate the added cost to some baseline value according to
 \begin{equation}
   V(x) = x^{\beta}
   \label{eq:val}
@@ -111,13 +111,13 @@ $\beta$.
 
 An atomic congestion game, $\mathcal{G} = (G, D, P, k)$, is a cost-minimization
 game parametrized by a directed graph $G$, a set of nondecreasing delay
-functions $D = \{c_e : \mathbb{Z}_{>0} \to \mathbb{R}\}$, a set of start and end
+functions $D$ such that each function is defined by $c_e(x) = \tau_e + \Delta_e(x)$ where $\Delta_e$ is a nondecreasing added cost function, a set of start and end
 points for each player $P =\{(s_1, t_1), \cdots, (s_k, t_k)\}$, and $k$ players.
 
-Lowball agents perceive congestion games by applying the valuation
-function~\eqref{eq:val} to each edge's delay function, $c_e(x)$, leading them to
+As we noted before, lowball agents perceive congestion games by applying the valuation
+function~\eqref{eq:val} to each edge's added cost function, $\Delta_e(x)$, leading them to
 perceive the game as $\mathcal{G}\pbet= (G, D\pbet, P, k)$ where $D\pbet =
-\{c_e\pbet(x)\}$, i.e. $c_e\pbet(x) = (c_e(x))^\beta$. Within this new
+\{c_e\pbet(x)\}$, where $c_e\pbet(x) = \tau_e + (\Delta_e(x))^\beta$. Within this new
 congestion game $\mathcal{G}\pbet$, the lowball agents act rationally: however
 the true costs they incur are reflected by the delay functions in $\mathcal{G}$.   
 
@@ -145,7 +145,7 @@ where $\mathbf{x}
 $\mathbf{s}$.  The perceived cost to player $i$ is
 \[
   C\pbet_i(\s) = \sum\limits_{e \in s_i}c_e\pbet(x_e) = \sum\limits_{e \in
-  s_i}c_e(x_e)^\beta.
+  s_i}\p{\tau_e + \Delta_e(x_e)^\beta}.
 \]
 From this, we know the total social cost is
 \[
@@ -223,7 +223,7 @@ equilibrium reached by lowball agents and the overall optimum solution.
   \caption{The original game $\mathcal{G}$ and the perceived game
   $\mathcal{G}\pbet$}
 \end{figure}
-Consider the two-player game shown in Figure~\ref{fig:affine} with $\beta =
+Consider the two-player game shown in Figure~\ref{fig:affine} where for all edges $e$, $\tau_e = 0$. Assume $\beta =
 1/2$. Then, the cost of taking the top path is $2 \cdot 9 = 18$. However, if
 both players take the bottom path, each incurs a cost of 6. Thus, for rational
 agents, the Nash equilibrium and the socially optimal strategy are the same --
@@ -259,14 +259,12 @@ cases. We seek to understand how much worse they can do.
   Since the strategy profile remains the same, the ratio between costs is $a
   C(\s\pbet)/(a C(\s^*)) = C(\s\pbet)/C(\s^*)$.
 \end{proof}
-
-Because $V(x) = x^\beta$ is concave, $V$ is subadditive, i.e.
-\begin{equation}
-  (x+y)^\beta \le x^\beta + y^\beta
-  \label{eq:subadditive}
-\end{equation}
-for $x,y \ge 0$.
-
+% Because $V(x) = x^\beta$ is concave, $V$ is subadditive, i.e.
+% \begin{equation}
+%   (x+y)^\beta \le x^\beta + y^\beta
+%   \label{eq:subadditive}
+% \end{equation}
+% for $x,y \ge 0$.
 \section{Lower Bound on LPOA} \label{sec:lb}
 \begin{figure}[H]
   \centering
@@ -327,7 +325,7 @@ for $x,y \ge 0$.
 \end{figure}
 
 As a lower bound, consider the LPOA in the one-player game shown in
-Figure~\ref{fig:lower}. Through its valuation function~\eqref{eq:val}, the agent
+Figure~\ref{fig:lower} where for all edge $e$, $\tau_e = 0$. Through its valuation function~\eqref{eq:val}, the agent
 perceives the game as in Figure~\ref{fig:lowerbet}. Thus, it is indifferent
 between the upper and lower paths, so taking the upper path is a valid
 equilibrium. However, the overall cost of this strategy is $n^{1/\beta}$,
@@ -372,10 +370,10 @@ $D\pbet$.
   \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le C(\s^*)
   \end{align*}
   Next, we observe that \begin{align*}
-    C\pbet(\s\pbet)^{1/\beta} &= \p{\sum_{e \in E} x_e c(x_e)^\beta}^{1/\beta}
+    C\pbet(\s\pbet)^{1/\beta} &= \p{\sum_{e \in E} x_e\p{\tau_e + \delta_e(x_e)^\beta}}^{1/\beta}
     \\
-    &\ge \sum_{e \in E} x_e^{1/\beta} c(x_e) \\
-    &\ge \sum_{e \in E} x_e c(x_e) \\
+    &\ge \sum_{e \in E} x_e^{1/\beta}\p{\tau_e^{1/\beta} + \delta_e(x_e)} \\
+    &\ge \sum_{e \in E} x_e\p{\tau_e + \delta_e(x_e)} \\
     &= C(\s\pbet)
   \end{align*}
   Putting both parts together, we have
