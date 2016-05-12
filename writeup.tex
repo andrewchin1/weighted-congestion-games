@@ -19,8 +19,7 @@
 
   Research shows that people aren't rational in evaluating costs -- instead,
   they undervalue costs in a nonlinear fashion
-  \cite{Kahneman1979}. Prospect theory seeks to model this
-  behavior. We consider the effects of this bias on agents in atomic congestion
+  \cite{Kahneman1979}. We consider the effects of this bias on agents in atomic congestion
   games, bounding its negative effects on social performance. We show regardless
   of the class of delay functions used, the ratio between the performance of
   biased agents and the social optimum grows with the size of the game. In other words, our findings indicate that people misunderstand the additivity of
@@ -48,6 +47,22 @@ This paper seeks to bring prospect theory and behavioral game theory together,
 the combination of which, to our knowledge, is novel.
 
 \section{A Motivating Example}
+% take 1 rd that costs 10 as opposed to 10 rds that cost 1
+% undervalue costs...ie why do you make everything cost systemically less in your mind
+
+% systemically thinking about high cost
+% thinking in percentage saving
+% person might be very enthusiastic about taking a new drug that
+% reduces their risk of contracting a disease from 5% to 1%, but much less enthusiastic about a new drug that reduces their risk from 50% to 46%
+Our work is motivated by the idea that people are risk seeking 
+
+people are likely to take greater risks to avoid a foreseeable loss
+
+ than to ensure a foreseeable gain. People who fear falling short
+of a goal, for instance, may choose to adopt a riskier course of action to eventually
+achieve that goal (that may leave them even further from their goal), compared with
+people who believe they will exceed their goal. 
+
 
 \section{Related Work}
 The price of anarchy (POA) is defined as the worst-case ratio between a Nash
@@ -110,14 +125,14 @@ Let $S_i$ be the set of all strategies for player $i$ in $\mathcal{G}$ i.e. all
 paths that go from $s_i$ to $t_i$.  Note $S_i$ is also the set of all strategies for
 player $i$ in $\mathcal{G}\pbet$.  Since the true costs agents incur is
 reflected in $\mathcal{G}$, it's useful to look at the difference in cost of an
-agent $i$'s strategy $s_i \in S_i$, the path it takes in the graph, with the
-costs functions in $\mathcal{G}\pbet$ versus the costs in $\mathcal{G}$.
+agent $i$'s strategy $s_i$ with the
+cost functions in $\mathcal{G}\pbet$ versus with the cost functions in $\mathcal{G}$.
 Rational play in $\mathcal{G}\pbet$ amounts to the players playing according to
 a Nash equilibrium.  Furthermore we know from Rosenthal \cite{Rosenthal1973}
 that every atomic congestion game has a pure Nash equilibrium.  Thus for a given
 pure Nash equilibrium strategy profile $\mathbf{s} = (s_1, \cdots, s_k)$ with
-each $s_i \in S_i$ for each $i$, we can evaulate the perceived cost of
-$\mathbf{s}$ (ie the cost in $\mathcal{G}\pbet$) and actual cost that will be
+each $s_i \in S_i$ for each player $i$, we can evaulate the perceived cost of
+$\mathbf{s}$ (the cost in $\mathcal{G}\pbet$) and actual cost that will be
 incurred (the cost in $\mathcal{G}$).
 
 In addition, we define the true cost to player $i$ for a strategy profile
@@ -156,8 +171,7 @@ optimum strategy profile of $\mathcal{G}$.
   \end{equation}
   where $\s\pbet$ is a Nash equilibrium of $\mathcal{G}\pbet$ and $\s^*$ is the
   socially optimum strategy profile of $\mathcal{G}$.
-\end{defn}
-In other words, the LPOA is a ratio between the true cost of the Nash
+\end{defn} In other words, the LPOA is a ratio between the true cost of the Nash
 equilibrium reached by lowball agents and the overall optimum solution.
 
 \section{Example with Affine Delay Functions}
@@ -201,7 +215,7 @@ equilibrium reached by lowball agents and the overall optimum solution.
         \Arc {\a}{\b}{$x^\beta$}
       }
 
-      \draw [arc,bend left=40] (s) to node [auto] {$3\cdot 2^\beta$} (t);
+      \draw [arc,bend left=40] (s) to node [auto] {$2^\beta\cdot3$} (t);
     \end{tikzpicture}
     \caption{The game $\mathcal{G}\pbet$ that the agents perceive}
     \label{fig:affinebet}
@@ -209,7 +223,7 @@ equilibrium reached by lowball agents and the overall optimum solution.
   \caption{The original game $\mathcal{G}$ and the perceived game
   $\mathcal{G}\pbet$}
 \end{figure}
-Consider the two-player game shown in Figure~\ref{fig:affine}. Assume $\beta =
+Consider the two-player game shown in Figure~\ref{fig:affine} with $\beta =
 1/2$. Then, the cost of taking the top path is $2 \cdot 9 = 18$. However, if
 both players take the bottom path, each incurs a cost of 6. Thus, for rational
 agents, the Nash equilibrium and the socially optimal strategy are the same --
@@ -224,7 +238,7 @@ to take the top path, even though this is not a Nash equilibrium in the original
 game. The true social cost of this equilibrium is $2 \cdot 3^{1/\beta} + 3 =
 21$, while the social cost of the optimal strategy profile is 12. Clearly, this
 bias can induce lowball agents to perform worse than rational agents in some
-cases. We seek to bound how much worse they can do.
+cases. We seek to understand how much worse they can do.
 
 \section{Preliminaries}
 \begin{lem} \label{lem:scale}
@@ -346,19 +360,25 @@ $D\pbet$.
 \begin{proof}
   Since by Lemma~\ref{lem:scale} scaling $\mathcal{G}$ doesn't change the ratio
   between $C(\s\pbet)$ and $C(\s^*)$, we can assume either $c_e(x_e) = 0$ or
-  $c_e(x_e) \ge 1$ for all $e \in E$. Thus, $c_e\pbet(x_e) \le c_e(x_e)$. This
-  means that $C\pbet({\s^*}\pbet) \le C\pbet(\s^*) \le C(\s^*)$.
-
-  By definition, we have $\poab \ge C\pbet(\s\pbet)/C\pbet({\s^*}\pbet)$, so
-  $C\pbet({\s^*}\pbet) \ge C\pbet(\s\pbet)/\poab$. Next, we observe that
+  $c_e(x_e) \ge 1$ for all $e \in E$ and thus
   \begin{align*}
+  c_e\pbet(x_e) &\le c_e(x_e) \quad \text{for all }e \in E \\
+  \Rightarrow C\pbet({\s^*}\pbet) &\le C\pbet(\s^*) \le C(\s^*)
+  \end{align*}
+  Now by definition, we get 
+  \begin{align*}
+  \frac{C\pbet(\s\pbet)}{C\pbet({\s^*}\pbet)} &\le \poab \\
+  \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le C\pbet({\s^*}\pbet) \\
+  \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le C(\s^*)
+  \end{align*}
+  Next, we observe that \begin{align*}
     C\pbet(\s\pbet)^{1/\beta} &= \p{\sum_{e \in E} x_e c(x_e)^\beta}^{1/\beta}
     \\
     &\ge \sum_{e \in E} x_e^{1/\beta} c(x_e) \\
     &\ge \sum_{e \in E} x_e c(x_e) \\
     &= C(\s\pbet)
   \end{align*}
-  Putting this all together, we have
+  Putting both parts together, we have
   \begin{align*}
     \frac{C(\s\pbet)}{{\poab}^{1/\beta}} &\le C(\s^*)^{1/\beta} \\
     \frac{C(\s\pbet)}{C(\s^*)} &\le {\poab}^{1/\beta} C(\s^*)^{1/\beta-1}
@@ -378,11 +398,10 @@ Roughgarden \cite{Roughgarden2012}.
   \end{equation}
   Furthermore, a family of cost functions $D$ is $(\lambda,\mu)$-smooth if every
   $c \in D$ is $(\lambda,\mu)$-smooth
-\end{defn}
-A game $\mathcal{G}$ is $(\lambda,\mu)$-smooth if $D$ is $(\lambda,\mu)$ smooth.
+\end{defn}A game $\mathcal{G}$ is $(\lambda,\mu)$-smooth if $D$ is $(\lambda,\mu)$-smooth.
 For a family $\hat{\mathcal{G}}$ of $(\lambda,\mu)$-smooth games, the price of
 anarchy for that game is at most $\frac{\lambda}{1-\mu}$ \cite{Roughgarden2012}.
-Moreover, if $\hat{\mathcal{G}}$ has a price of anarchy POA, then there exists
+Moreover, if $\hat{\mathcal{G}}$ has a price of anarchy, then there exists
 some $(\lambda,\mu)$ such that $\hat{\mathcal{G}}$ is $(\lambda,\mu)$-smooth and
 $\frac{\lambda}{1-\mu} = \poa$ \cite{Roughgarden2012}. Using this, we will show
 that if POA is constant for $\hat{\mathcal{G}}$, then \poab is constant as well.
@@ -420,7 +439,7 @@ that if POA is constant for $\hat{\mathcal{G}}$, then \poab is constant as well.
     c\pbet(x).
   \]
   Since this holds for all $c\pbet \in D\pbet$, $D\pbet$ is $(\lambda^\beta +
-  \mu^\beta, \mu^\beta)$ smooth.
+  \mu^\beta, \mu^\beta)$-smooth.
 \end{proof}
 
 From Roughgarden, we know that for any $D$ with finite $\poa$, there exists
@@ -602,13 +621,16 @@ First, we need the following Lemma, proven by Awerbuch et al.
   %\end{align*}
 %\end{proof}
 
-\section{Open Questions}
+\section{Discussion}
 Throughout this paper, we have assumed that each agent has the same bias
 parameter $\beta$. For a mixture of agents with different biases, one could ask
-if an analogous upper bound on the LPOA can be derived.
+if an analogous upper bound on the LPOA can be derived.  Such a bound could help people understand the worst cases for a bias and perhaps lead to solutions to such biases.
 
 Furthermore, while we have shown that $\poab$ is finite as long as $\poa$ is
-finite, it is an open question whether $\poab \le \poa$ in all cases.
+finite, it is an open question whether $\poab \le \poa$ in all cases.  This could be useful because .... 
+% In the paper, we bounded the lowball price of anarchy, which helped understand the worst case in congestion games with agents who undervalued costs.  We'd also like to look at agents in congestions games under other behavioral biases, like overweighing small probabilities, another concept put forth by prospect theory.
+
+The present analysis of the lowball price of anarchy has two important results.  Firstly, the lowball price of anarchy grows with the size of the game or more specifically the cost of the optimal strategy.  And secondly, our approach suggests that congestion games are a good means of studying behavioral biases due to the nature and previous work done on congestion games.  Thus we suggest that lowball agents and agents working under other behavioural biases in congestion games should be further studied as they help descriptively model the real world.
 
 \printbibliography
 
