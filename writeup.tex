@@ -26,6 +26,8 @@
   costs, preferring one large cost over a large number of smaller costs, even
   when it is not in their rational interest to do so.
 
+$\xi$
+
 \end{abstract}
 
 \begin{multicols}{2} % Two-column layout throughout the main article text
@@ -47,22 +49,7 @@ This paper seeks to bring prospect theory and behavioral game theory together,
 the combination of which, to our knowledge, is novel.
 
 \section{A Motivating Example}
-% take 1 rd that costs 10 as opposed to 10 rds that cost 1
-% undervalue costs...ie why do you make everything cost systemically less in your mind
-
-% systemically thinking about high cost
-% thinking in percentage saving
-% person might be very enthusiastic about taking a new drug that
-% reduces their risk of contracting a disease from 5% to 1%, but much less enthusiastic about a new drug that reduces their risk from 50% to 46%
-Our work is motivated by the idea that people are risk seeking 
-
-people are likely to take greater risks to avoid a foreseeable loss
-
- than to ensure a foreseeable gain. People who fear falling short
-of a goal, for instance, may choose to adopt a riskier course of action to eventually
-achieve that goal (that may leave them even further from their goal), compared with
-people who believe they will exceed their goal. 
-
+Our work is motivated by real life road congestion.  In familiar networks, on a clear day you know what the congestion will be; call this a reference point.  And when you wake up late or it's raining, there ends up being more congestion on the road than you think.  To be specific, imagine you can take two roads to get to work: one that usually takes 20 minutes and with traffic takes an additional 9 and the other road takes 24 minutes and with traffic an additional 4 minute.  Now you probably are still biased to go on the road you know is usually less trafficy, the 20 + 9 = 29 minute road, instead of the 24 + 4 = 28 minute road.  If we assume people undervalue additional costs by taking the square root of the additional cost, we find that this exactly models our intuitive understanding as the perceived cost is now 20 + 3 = 23 for one road and 24 + 2 = 26 for the other road so you want to take the road with a base cost of 20.
 
 \section{Related Work}
 The price of anarchy (POA) is defined as the worst-case ratio between a Nash
@@ -117,7 +104,7 @@ points for each player $P =\{(s_1, t_1), \cdots, (s_k, t_k)\}$, and $k$ players.
 As we noted before, lowball agents perceive congestion games by applying the valuation
 function~\eqref{eq:val} to each edge's added cost function, $\Delta_e(x)$, leading them to
 perceive the game as $\mathcal{G}\pbet= (G, D\pbet, P, k)$ where $D\pbet =
-\{c_e\pbet(x)\}$, where $c_e\pbet(x) = \tau_e + (\Delta_e(x))^\beta$. Within this new
+\{c_e\pbet(x)\}$, where $c_e\pbet(x) = \tau_e + \Delta_e\pbet(x) = \tau_e + (\Delta_e(x))^\beta$. Within this new
 congestion game $\mathcal{G}\pbet$, the lowball agents act rationally: however
 the true costs they incur are reflected by the delay functions in $\mathcal{G}$.   
 
@@ -239,32 +226,31 @@ game. The true social cost of this equilibrium is $2 \cdot 3^{1/\beta} + 3 =
 21$, while the social cost of the optimal strategy profile is 12. Clearly, this
 bias can induce lowball agents to perform worse than rational agents in some
 cases. We seek to understand how much worse they can do.
-
-\section{Preliminaries}
-\begin{lem} \label{lem:scale}
-  Scaling the cost functions by a constant $a > 0$, i.e. $\hat c_e(x) = a
-  c_e(x)$, does not change the ratio $C(\s\pbet)/C(\s^*)$.
-\end{lem}
-\begin{proof}
-  $\s\pbet$ is a Nash equilibrium in $\mathcal{G}\pbet$ if and only if $\sum_{e
-  \in s_i} c_e\pbet(x_e) \le \sum_{e \in s_i'} c_e\pbet(x_e + 1)$ for all $i$
-  and for any $s_i'$. After scaling the cost functions by $a$, $\s\pbet$ is
-  still a Nash equilibrium because for all $i$,
-  \begin{align*}
-    \sum_{e \in s_i} \hat c_e\pbet(x_e) &= a^\beta \sum_{e \in s_i}
-    c_e\pbet(x_e) \\
-    &\le a^\beta \sum_{e \in s_i'} c_e\pbet(x_e + 1) \\
-    &= \sum_{e \in s_i'} \hat c_e\pbet(x_e+1).
-  \end{align*}
-  Since the strategy profile remains the same, the ratio between costs is $a
-  C(\s\pbet)/(a C(\s^*)) = C(\s\pbet)/C(\s^*)$.
-\end{proof}
-% Because $V(x) = x^\beta$ is concave, $V$ is subadditive, i.e.
-% \begin{equation}
-%   (x+y)^\beta \le x^\beta + y^\beta
-%   \label{eq:subadditive}
-% \end{equation}
-% for $x,y \ge 0$.
+% \section{Preliminaries}
+% \begin{lem} \label{lem:scale}
+%   Scaling the cost functions by a constant $a > 0$, i.e. $\hat c_e(x) = a
+%   c_e(x)$, does not change the ratio $C(\s\pbet)/C(\s^*)$.
+% \end{lem}
+% \begin{proof}
+%   $\s\pbet$ is a Nash equilibrium in $\mathcal{G}\pbet$ if and only if $\sum_{e
+%   \in s_i} c_e\pbet(x_e) \le \sum_{e \in s_i'} c_e\pbet(x_e + 1)$ for all $i$
+%   and for any $s_i'$. After scaling the cost functions by $a$, $\s\pbet$ is
+%   still a Nash equilibrium because for all $i$,
+%   \begin{align*}
+%     \sum_{e \in s_i} \hat c_e\pbet(x_e) &= a^\beta \sum_{e \in s_i}
+%     c_e\pbet(x_e) \\
+%     &\le a^\beta \sum_{e \in s_i'} c_e\pbet(x_e + 1) \\
+%     &= \sum_{e \in s_i'} \hat c_e\pbet(x_e+1).
+%   \end{align*}
+%   Since the strategy profile remains the same, the ratio between costs is $a
+%   C(\s\pbet)/(a C(\s^*)) = C(\s\pbet)/C(\s^*)$.
+% \end{proof}
+% % Because $V(x) = x^\beta$ is concave, $V$ is subadditive, i.e.
+% % \begin{equation}
+% %   (x+y)^\beta \le x^\beta + y^\beta
+% %   \label{eq:subadditive}
+% % \end{equation}
+% % for $x,y \ge 0$.
 \section{Lower Bound on LPOA} \label{sec:lb}
 \begin{figure}[H]
   \centering
@@ -672,13 +658,12 @@ First, we need the following Lemma, proven by Awerbuch et al.
 \section{Discussion}
 Throughout this paper, we have assumed that each agent has the same bias
 parameter $\beta$. For a mixture of agents with different biases, one could ask
-if an analogous upper bound on the LPOA can be derived.  Such a bound could help people understand the worst cases for a bias and perhaps lead to solutions to such biases.
+if an analogous upper bound on the LPOA can be derived.
 
 Furthermore, while we have shown that $\poab$ is finite as long as $\poa$ is
-finite, it is an open question whether $\poab \le \poa$ in all cases.  This could be useful because .... 
-% In the paper, we bounded the lowball price of anarchy, which helped understand the worst case in congestion games with agents who undervalued costs.  We'd also like to look at agents in congestions games under other behavioral biases, like overweighing small probabilities, another concept put forth by prospect theory.
+finite, it is an open question whether $\poab \le \poa$ in all cases.  This could be provide more intuition as to how the bias places out in congestion games.
 
-The present analysis of the lowball price of anarchy has two important results.  Firstly, the lowball price of anarchy grows with the size of the game or more specifically the cost of the optimal strategy.  And secondly, our approach suggests that congestion games are a good means of studying behavioral biases due to the nature and previous work done on congestion games.  Thus we suggest that lowball agents and agents working under other behavioural biases in congestion games should be further studied as they help descriptively model the real world.
+The present analysis of the lowball price of anarchy has two important results.  Firstly, the lowball price of anarchy grows with the size of the game or more specifically the cost of the optimal strategy.  And secondly, our approach suggests that congestion games are a good means of studying behavioral biases due to the nature and previous work done on congestion games.  In the future, we'd like to study other agents with behavioural biases in congestion games to better understand what happens in the worst and best cases.  Furthermore, we believe they should be studied as they help descriptively model the real world.
 
 \printbibliography
 
