@@ -385,8 +385,8 @@ $D\pbet$.
   \footnote{If this not the case, then Theorem~\ref{thm:lpoa} does not hold.
   There are pathological examples in which, as the limit as $\beta$ goes to 0,
   the LPOA is unbounded. However, for reasonable examples, we assume that this
-  is not the case.}. If $\Delta_e(x_e) = 0$, then $c_e\pbet(x_e) = c_e(x_e)$.
-  Otherwise,
+  is not the case.}. If $\Delta_e(x_e) = 0$ or $\xi \ge 1$, then $c_e\pbet(x_e)
+  = c_e(x_e)$. Otherwise,
   \begin{align*}
     c_e\pbet(x_e) &= \tau_e + \Delta_e(x_e)^\beta \\
     &= \tau_e + \Delta_e(x_e) + (\Delta_e(x_e)^\beta - \Delta_e(x_e)) \\
@@ -402,13 +402,13 @@ $D\pbet$.
   \end{align*}
   Thus,
   \[
-    C\pbet({\s^*}\pbet) \le C\pbet(\s^*) \le \xi^{\beta-1} C(\s^*)
+    C\pbet({\s^*}\pbet) \le C\pbet(\s^*) \le {\xi'}^{\beta-1} C(\s^*)
   \]
-  Now by definition, we get 
+  where $\xi' = \min\{\xi,1\}$. By definition,
   \begin{align*}
   \frac{C\pbet(\s\pbet)}{C\pbet({\s^*}\pbet)} &\le \poab \\
   \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le C\pbet({\s^*}\pbet) \\
-  \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le \xi^{\beta-1} C(\s^*)
+  \Rightarrow \frac{C\pbet(\s\pbet)}{\poab} &\le {\xi'}^{\beta-1} C(\s^*)
   \end{align*}
   Next, we observe that
   \begin{align*}
@@ -420,8 +420,9 @@ $D\pbet$.
   \end{align*}
   Putting both parts together, we have
   \begin{align*}
-    \frac{C(\s\pbet)}{{\poab}^{1/\beta}} &\le \xi^{1-1/\beta} C(\s^*)^{1/\beta} \\
-    \frac{C(\s\pbet)}{C(\s^*)} &\le {\poab}^{1/\beta} \xi^{1-1/\beta}
+    \frac{C(\s\pbet)}{{\poab}^{1/\beta}} &\le {\xi'}^{1-1/\beta}
+    C(\s^*)^{1/\beta} \\
+    \frac{C(\s\pbet)}{C(\s^*)} &\le {\poab}^{1/\beta} {\xi'}^{1-1/\beta}
     C(\s^*)^{1/\beta-1} \\
     &= O\p{{\poab}^{1/\beta} C(\s^*)^{1/\beta-1}}
   \end{align*}
