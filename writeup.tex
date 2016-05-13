@@ -174,6 +174,46 @@ optimum strategy profile of $\mathcal{G}$.
 \end{defn} In other words, the LPOA is a ratio between the true cost of the Nash
 equilibrium reached by lowball agents and the overall optimum solution.
 
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
+      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
+
+      \foreach \l/\n/\p in {{s/s/(0,0)}, {t/t/(2,0)}}
+      {
+        \node [vertex] at \p (\l) {$\n$};
+      }
+
+      \draw [arc,bend left=30] (s) to node [auto] {$20 + \textcolor{red}{9}$} (t);
+      \draw [arc,bend right=30] (s) to node [auto] {$24 + \textcolor{red}{4}$}
+      (t);
+    \end{tikzpicture}
+    \caption{Road congestion}
+    \label{fig:road}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
+      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
+
+      \foreach \l/\n/\p in {{s/s/(0,0)}, {t/t/(2,0)}}
+      {
+        \node [vertex] at \p (\l) {$\n$};
+      }
+
+      \draw [arc,bend left=30] (s) to node [auto] {$20 + \textcolor{red}{3}$} (t);
+      \draw [arc,bend right=30] (s) to node [auto] {$24 + \textcolor{red}{2}$}
+      (t);
+    \end{tikzpicture}
+    \caption{Perceived road congestion}
+    \label{fig:roadbet}
+  \end{subfigure}
+  \caption{Actual vs. perceived road congestion}
+\end{figure}
+
 \section{Example with Affine Delay Functions}
 \begin{figure}[H]
   \centering
