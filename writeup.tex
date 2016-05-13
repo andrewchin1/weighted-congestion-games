@@ -16,17 +16,11 @@
 \thispagestyle{fancy} % All pages have headers and footers
 
 \begin{abstract}
-
-  Research shows that people aren't rational in evaluating costs -- instead,
-  they undervalue costs in a nonlinear fashion
-  \cite{Kahneman1979}. We consider the effects of this bias on agents in atomic congestion
-  games, bounding its negative effects on social performance. We show regardless
+Research shows that people aren't rational in evaluating costs -- instead, they undervalue costs in a nonlinear fashion \cite{Kahneman1979}. We consider the effects of this bias on agents in atomic congestion games, bounding its negative effects on social performance. We show regardless
   of the class of delay functions used, the ratio between the performance of
   biased agents and the social optimum grows with the size of the game. In other words, our findings indicate that people misunderstand the additivity of
   costs, preferring one large cost over a large number of smaller costs, even
   when it is not in their rational interest to do so.
-
-$\xi$
 
 \end{abstract}
 
@@ -49,7 +43,51 @@ This paper seeks to bring prospect theory and behavioral game theory together,
 the combination of which, to our knowledge, is novel.
 
 \section{A Motivating Example}
-Our work is motivated by real life road congestion.  In familiar networks, on a clear day you know what the congestion will be; call this a reference point.  And when you wake up late or it's raining, there ends up being more congestion on the road than you think.  To be specific, imagine you can take two roads to get to work: one that usually takes 20 minutes and with traffic takes an additional 9 and the other road takes 24 minutes and with traffic an additional 4 minute.  Now you probably are still biased to go on the road you know is usually less trafficy, the 20 + 9 = 29 minute road, instead of the 24 + 4 = 28 minute road.  If we assume people undervalue additional costs by taking the square root of the additional cost, we find that this exactly models our intuitive understanding as the perceived cost is now 20 + 3 = 23 for one road and 24 + 2 = 26 for the other road so you want to take the road with a base cost of 20.
+Our work is motivated by real life road congestion. On a clear day you know what the congestion will be on the road; call this a reference point. When you wake up late or it's raining, there ends up being more congestion on the road than you think.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
+      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
+
+      \foreach \l/\n/\p in {{s/s/(0,0)}, {t/t/(2,0)}}
+      {
+        \node [vertex] at \p (\l) {$\n$};
+      }
+
+      \draw [arc,bend left=30] (s) to node [auto] {$20 + \textcolor{red}{9}$} (t);
+      \draw [arc,bend right=30] (s) to node [auto] {$24 + \textcolor{red}{4}$}
+      (t);
+    \end{tikzpicture}
+    \caption{Road congestion}
+    \label{fig:road}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{\linewidth}
+    \centering
+    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
+      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
+
+      \foreach \l/\n/\p in {{s/s/(0,0)}, {t/t/(2,0)}}
+      {
+        \node [vertex] at \p (\l) {$\n$};
+      }
+
+      \draw [arc,bend left=30] (s) to node [auto] {$20 + \textcolor{red}{3}$} (t);
+      \draw [arc,bend right=30] (s) to node [auto] {$24 + \textcolor{red}{2}$}
+      (t);
+    \end{tikzpicture}
+    \caption{Perceived road congestion}
+    \label{fig:roadbet}
+  \end{subfigure}
+  \caption{Actual vs. perceived road congestion}
+\end{figure}
+
+Consider the network illustrated in Figure~\ref{fig:road}.  The story goes you can take two roads to get to work and, today, there's an unusual amount of traffic! One road normally takes 20 minutes, but today takes an additional 9 minutes. The other road, which usually takes 24 minutes, takes an additional 4 minutes. Now you might are still want to take the road you normally take even the cost is now higher.
+
+If we assume people undervalue additional costs (any costs incurred beyond the reference cost) by taking the square root of the additional cost as in Figure~\ref{fig:roadbet}, we find that this leads to you choosing the road with a reference point of 20 since $20 + 3 = 23 < 26 = 24 + 2$.  This models the intuition that you value less the additional costs incurred.  Thus you may want to take the road you normally go on despite it's actual higher cost.
 
 \section{Related Work}
 The price of anarchy (POA) is defined as the worst-case ratio between a Nash
@@ -160,46 +198,6 @@ optimum strategy profile of $\mathcal{G}$.
   socially optimum strategy profile of $\mathcal{G}$.
 \end{defn} In other words, the LPOA is a ratio between the true cost of the Nash
 equilibrium reached by lowball agents and the overall optimum solution.
-
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[b]{\linewidth}
-    \centering
-    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
-      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
-
-      \foreach \l/\n/\p in {{s/s/(0,0)}, {t/t/(2,0)}}
-      {
-        \node [vertex] at \p (\l) {$\n$};
-      }
-
-      \draw [arc,bend left=30] (s) to node [auto] {$20 + \textcolor{red}{9}$} (t);
-      \draw [arc,bend right=30] (s) to node [auto] {$24 + \textcolor{red}{4}$}
-      (t);
-    \end{tikzpicture}
-    \caption{Road congestion}
-    \label{fig:road}
-  \end{subfigure}
-
-  \begin{subfigure}[b]{\linewidth}
-    \centering
-    \begin{tikzpicture} [baseline=(s.base), arc/.style={->,thick,>=stealth},
-      vertex/.style={draw,circle,minimum size=.5cm},scale=1.5]
-
-      \foreach \l/\n/\p in {{s/s/(0,0)}, {t/t/(2,0)}}
-      {
-        \node [vertex] at \p (\l) {$\n$};
-      }
-
-      \draw [arc,bend left=30] (s) to node [auto] {$20 + \textcolor{red}{3}$} (t);
-      \draw [arc,bend right=30] (s) to node [auto] {$24 + \textcolor{red}{2}$}
-      (t);
-    \end{tikzpicture}
-    \caption{Perceived road congestion}
-    \label{fig:roadbet}
-  \end{subfigure}
-  \caption{Actual vs. perceived road congestion}
-\end{figure}
 
 \section{Example with Affine Delay Functions}
 \begin{figure}[H]
@@ -607,8 +605,9 @@ First, we need the following Lemma, proven by Awerbuch et al.
   because either $x_e^* = 0$, in which case both sides are 0, or $x_e^* \ge 1$,
   in which case ${x_e^*}^i \ge 1$. This gives us
   \begin{align*}
-    \p{\frac{d}{\ln \kappa} + 1}^{d\beta} \sum_{e \in E} x_e^* {\sum_{i=0}^d
-    a_{e,i}}^\beta &\le \p{\frac{d}{\ln \kappa} + 1}^{d\beta} \sum_{e \in E}
+    \p{\frac{d}{\ln \kappa} + 1}^{d\beta} &\sum_{e \in E} x_e^* {\sum_{i=0}^d
+    a_{e,i}}^\beta \\
+    &\le \p{\frac{d}{\ln \kappa} + 1}^{d\beta} \sum_{e \in E}
     x_e^* \p{\sum_{i=0}^d a_{e,i}
     {x_e^*}^i}^\beta \\
     &= \p{\frac{d}{\ln \kappa} + 1}^{d\beta} C\pbet(\s^*).
@@ -726,13 +725,6 @@ finite, it is an open question whether $\poab \le \poa$ in all cases.  This coul
 The present analysis of the lowball price of anarchy has two important results.  Firstly, the lowball price of anarchy grows with the size of the game or more specifically the cost of the optimal strategy.  And secondly, our approach suggests that congestion games are a good means of studying behavioral biases due to the nature and previous work done on congestion games.  In the future, we'd like to study other agents with behavioural biases in congestion games to better understand what happens in the worst and best cases.  Furthermore, we believe they should be studied as they help descriptively model the real world.
 
 \printbibliography
-
-% Any path $s$ that a player takes in $\mathcal{G}^\bet$ can be mapped to a path in $\mathcal{G}^\bet$
-
-% We know from Rosenthal \cit that every atomic congestion game has a pure Nash equilibrium.  Thus in both $\mathcal{G}\pbet$ and 
-
-
-
 
 \end{multicols}
 
